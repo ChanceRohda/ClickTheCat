@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Cat_Clicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44e-lw-WQv">
+                                <rect key="frame" x="50" y="194" width="339" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="QDa-0B-xI1"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="cat"/>
+                                <connections>
+                                    <action selector="catDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dWH-B2-PKo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cat Clicker!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vY0-cN-wFc">
+                                <rect key="frame" x="108" y="61" width="199" height="47"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="43"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coins: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jy3-Vq-mIp">
+                                <rect key="frame" x="159" y="446" width="97" height="33"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFn-ci-AU6">
+                                <rect key="frame" x="142.5" y="579" width="129" height="67"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Shop!">
+                                    <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="48"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="shopButtonDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YwY-wy-PpO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="44e-lw-WQv" secondAttribute="trailing" constant="25" id="5rV-8R-ZPe"/>
+                            <constraint firstItem="44e-lw-WQv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="8jg-7r-0VR"/>
+                            <constraint firstItem="vY0-cN-wFc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="108" id="Ctz-ES-L8m"/>
+                            <constraint firstItem="jy3-Vq-mIp" firstAttribute="top" secondItem="44e-lw-WQv" secondAttribute="bottom" constant="72" id="EcZ-Lw-8H6"/>
+                            <constraint firstItem="xFn-ci-AU6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142.5" id="IAI-OV-Ibx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vY0-cN-wFc" secondAttribute="trailing" constant="107" id="LN8-9g-RRn"/>
+                            <constraint firstItem="jy3-Vq-mIp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="159" id="MPh-Ui-VU7"/>
+                            <constraint firstItem="xFn-ci-AU6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R6r-sn-deS"/>
+                            <constraint firstItem="44e-lw-WQv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="TP0-Z6-OFd"/>
+                            <constraint firstItem="xFn-ci-AU6" firstAttribute="top" secondItem="jy3-Vq-mIp" secondAttribute="bottom" constant="100" id="bGt-ZX-k7c"/>
+                            <constraint firstItem="44e-lw-WQv" firstAttribute="top" secondItem="vY0-cN-wFc" secondAttribute="bottom" constant="86" id="cTj-Qo-ZoD"/>
+                            <constraint firstItem="vY0-cN-wFc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="17" id="cYx-k3-unX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="catButton" destination="44e-lw-WQv" id="xcm-eG-fab"/>
+                        <outlet property="coinLabel" destination="jy3-Vq-mIp" id="gNS-aw-RJ2"/>
+                        <outlet property="costLabel" destination="KtD-s9-770" id="mzT-Tg-Z6h"/>
+                        <segue destination="noV-kn-ymG" kind="presentation" identifier="shopSegue" id="JiY-fB-Phd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="35" y="98"/>
+        </scene>
+        <!--Shop View Controller-->
+        <scene sceneID="3EA-WF-G6d">
+            <objects>
+                <viewController id="noV-kn-ymG" customClass="ShopViewController" customModule="Cat_Clicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ii3-Tb-HUm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxz-1Q-HfG">
+                                <rect key="frame" x="80" y="192" width="254" height="90"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="I0d-0l-M1b"/>
+                                    <constraint firstAttribute="width" constant="254" id="MeT-zX-O35"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Upgrade!">
+                                    <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="43"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="upgradeButtonDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EDY-0y-6Er"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade Cost: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtD-s9-770">
+                                <rect key="frame" x="134" y="132" width="146.5" height="25"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gGX-ez-F2X"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jxz-1Q-HfG" firstAttribute="top" secondItem="KtD-s9-770" secondAttribute="bottom" constant="35" id="Rk1-wz-Csz"/>
+                            <constraint firstItem="jxz-1Q-HfG" firstAttribute="leading" secondItem="gGX-ez-F2X" secondAttribute="leading" constant="80" id="f6F-Sg-3F3"/>
+                            <constraint firstItem="KtD-s9-770" firstAttribute="top" secondItem="gGX-ez-F2X" secondAttribute="top" constant="88" id="fTl-bq-vb0"/>
+                            <constraint firstItem="KtD-s9-770" firstAttribute="leading" secondItem="gGX-ez-F2X" secondAttribute="leading" constant="134" id="uTF-FN-D4Z"/>
+                            <constraint firstItem="gGX-ez-F2X" firstAttribute="trailing" secondItem="jxz-1Q-HfG" secondAttribute="trailing" constant="80" id="vL5-Uc-ieS"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lxF-uc-WQo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749" y="98"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cat" width="178" height="164"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
