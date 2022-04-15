@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,10 +19,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44e-lw-WQv">
                                 <rect key="frame" x="50" y="194" width="339" height="180"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="339" id="HEA-BL-UEu"/>
                                     <constraint firstAttribute="height" constant="180" id="QDa-0B-xI1"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="y7P-zv-Yll"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="cat"/>
+                                <buttonConfiguration key="configuration" style="plain" image="cat" title=" " imagePadding="0.0"/>
                                 <connections>
                                     <action selector="catDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dWH-B2-PKo"/>
                                 </connections>
@@ -45,8 +46,14 @@
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Shop!">
-                                    <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="48"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Shop!">
+                                            <attributes>
+                                                <font key="NSFont" size="48" name="MarkerFelt-Thin"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="shopButtonDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YwY-wy-PpO"/>
@@ -54,8 +61,9 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="44e-lw-WQv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="4Wj-w3-K9Y"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="44e-lw-WQv" secondAttribute="trailing" constant="25" id="5rV-8R-ZPe"/>
                             <constraint firstItem="44e-lw-WQv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="8jg-7r-0VR"/>
                             <constraint firstItem="vY0-cN-wFc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="108" id="Ctz-ES-L8m"/>
@@ -63,8 +71,11 @@
                             <constraint firstItem="xFn-ci-AU6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142.5" id="IAI-OV-Ibx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vY0-cN-wFc" secondAttribute="trailing" constant="107" id="LN8-9g-RRn"/>
                             <constraint firstItem="jy3-Vq-mIp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="159" id="MPh-Ui-VU7"/>
+                            <constraint firstItem="44e-lw-WQv" firstAttribute="top" secondItem="vY0-cN-wFc" secondAttribute="bottom" constant="86" id="Ofw-y7-W3m"/>
                             <constraint firstItem="xFn-ci-AU6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R6r-sn-deS"/>
                             <constraint firstItem="44e-lw-WQv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="TP0-Z6-OFd"/>
+                            <constraint firstItem="jy3-Vq-mIp" firstAttribute="top" secondItem="44e-lw-WQv" secondAttribute="bottom" constant="72" id="Wh9-i4-JJd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="44e-lw-WQv" secondAttribute="trailing" constant="25" id="b78-Ef-Zmj"/>
                             <constraint firstItem="xFn-ci-AU6" firstAttribute="top" secondItem="jy3-Vq-mIp" secondAttribute="bottom" constant="100" id="bGt-ZX-k7c"/>
                             <constraint firstItem="44e-lw-WQv" firstAttribute="top" secondItem="vY0-cN-wFc" secondAttribute="bottom" constant="86" id="cTj-Qo-ZoD"/>
                             <constraint firstItem="vY0-cN-wFc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="17" id="cYx-k3-unX"/>
@@ -73,7 +84,6 @@
                     <connections>
                         <outlet property="catButton" destination="44e-lw-WQv" id="xcm-eG-fab"/>
                         <outlet property="coinLabel" destination="jy3-Vq-mIp" id="gNS-aw-RJ2"/>
-                        <outlet property="costLabel" destination="KtD-s9-770" id="mzT-Tg-Z6h"/>
                         <segue destination="noV-kn-ymG" kind="presentation" identifier="shopSegue" id="JiY-fB-Phd"/>
                     </connections>
                 </viewController>
@@ -89,39 +99,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxz-1Q-HfG">
-                                <rect key="frame" x="80" y="193.5" width="254" height="90"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUh-f6-9Qt">
+                                <rect key="frame" x="175" y="13" width="65" height="36"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="33"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost: 10 Coins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj6-H0-kGb">
+                                <rect key="frame" x="143" y="686" width="128" height="22"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H89-fZ-EVo">
+                                <rect key="frame" x="80" y="603" width="254" height="55.5"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="I0d-0l-M1b"/>
-                                    <constraint firstAttribute="width" constant="254" id="MeT-zX-O35"/>
+                                    <constraint firstAttribute="width" constant="254" id="G9b-1c-kfq"/>
+                                    <constraint firstAttribute="height" constant="55.5" id="KqU-E4-R1R"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Upgrade!">
-                                    <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="43"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Explode-O-Cat">
+                                            <attributes>
+                                                <font key="NSFont" size="38" name="MarkerFelt-Thin"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="upgradeButtonDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EDY-0y-6Er"/>
+                                    <action selector="explodeButtonDidTouch:" destination="noV-kn-ymG" eventType="touchUpInside" id="TeK-Je-hoe"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade Cost: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtD-s9-770">
-                                <rect key="frame" x="134" y="132" width="153" height="26.5"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="24"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coins: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqA-Cj-h9W">
+                                <rect key="frame" x="158.5" y="123" width="97" height="33"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gGX-ez-F2X"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="jxz-1Q-HfG" firstAttribute="top" secondItem="KtD-s9-770" secondAttribute="bottom" constant="35" id="Rk1-wz-Csz"/>
-                            <constraint firstItem="jxz-1Q-HfG" firstAttribute="leading" secondItem="gGX-ez-F2X" secondAttribute="leading" constant="80" id="f6F-Sg-3F3"/>
-                            <constraint firstItem="KtD-s9-770" firstAttribute="top" secondItem="gGX-ez-F2X" secondAttribute="top" constant="88" id="fTl-bq-vb0"/>
-                            <constraint firstItem="KtD-s9-770" firstAttribute="leading" secondItem="gGX-ez-F2X" secondAttribute="leading" constant="134" id="uTF-FN-D4Z"/>
-                            <constraint firstItem="gGX-ez-F2X" firstAttribute="trailing" secondItem="jxz-1Q-HfG" secondAttribute="trailing" constant="80" id="vL5-Uc-ieS"/>
+                            <constraint firstItem="gj6-H0-kGb" firstAttribute="leading" secondItem="gGX-ez-F2X" secondAttribute="leading" constant="143" id="1NI-Id-x2m"/>
+                            <constraint firstItem="gj6-H0-kGb" firstAttribute="top" secondItem="H89-fZ-EVo" secondAttribute="bottom" constant="27.5" id="ArB-p4-j2m"/>
+                            <constraint firstItem="H89-fZ-EVo" firstAttribute="leading" secondItem="gGX-ez-F2X" secondAttribute="leading" constant="80" id="FcA-fs-g9b"/>
+                            <constraint firstItem="qUh-f6-9Qt" firstAttribute="leading" secondItem="gGX-ez-F2X" secondAttribute="leading" constant="175" id="PgW-P6-gON"/>
+                            <constraint firstItem="gGX-ez-F2X" firstAttribute="trailing" secondItem="qUh-f6-9Qt" secondAttribute="trailing" constant="174" id="Thx-xJ-Tpe"/>
+                            <constraint firstItem="PqA-Cj-h9W" firstAttribute="top" secondItem="qUh-f6-9Qt" secondAttribute="bottom" constant="74" id="dCu-ce-ydd"/>
+                            <constraint firstItem="H89-fZ-EVo" firstAttribute="top" secondItem="qUh-f6-9Qt" secondAttribute="bottom" constant="554" id="fee-Dh-yM1"/>
+                            <constraint firstItem="H89-fZ-EVo" firstAttribute="top" secondItem="PqA-Cj-h9W" secondAttribute="bottom" constant="447" id="hdu-ms-OyP"/>
+                            <constraint firstItem="gGX-ez-F2X" firstAttribute="bottom" secondItem="gj6-H0-kGb" secondAttribute="bottom" constant="134" id="hha-Pv-UvA"/>
+                            <constraint firstItem="qUh-f6-9Qt" firstAttribute="top" secondItem="Ii3-Tb-HUm" secondAttribute="top" constant="13" id="oPK-Et-732"/>
+                            <constraint firstItem="gGX-ez-F2X" firstAttribute="trailing" secondItem="gj6-H0-kGb" secondAttribute="trailing" constant="143" id="qqh-Kj-Gia"/>
+                            <constraint firstItem="gGX-ez-F2X" firstAttribute="trailing" secondItem="H89-fZ-EVo" secondAttribute="trailing" constant="80" id="qx9-hW-QyP"/>
+                            <constraint firstItem="PqA-Cj-h9W" firstAttribute="centerX" secondItem="Ii3-Tb-HUm" secondAttribute="centerX" id="wzL-Gl-Oyx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="coinLabel" destination="PqA-Cj-h9W" id="bZv-ik-hiq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lxF-uc-WQo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -130,8 +169,5 @@
     </scenes>
     <resources>
         <image name="cat" width="178" height="164"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

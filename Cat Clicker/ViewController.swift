@@ -7,15 +7,34 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol ViewControllerDelegate: AnyObject {
+    func upgrade(coinDecrement: Int, cpcIncrement: Int)
+    func getCoins() -> Int
+}
+
+
+class ViewController: UIViewController, ViewControllerDelegate {
     var coins: Int = 0
-    var level: Int = 1
-    var cost: Int = 1
+    var cpc: Int = 1
     @IBOutlet weak var catButton: UIButton!
     @IBOutlet weak var coinLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
     
+    func getCoins() -> Int{
+        return coins
+    }
+    func upgrade(coinDecrement: Int, cpcIncrement: Int) {
+        coins -= coinDecrement
+        cpc += cpcIncrement
+    }
+    func incrementCoins(increment: Int) {
+        coins += increment
+        coinLabel.text = "Coins: \(coins)"
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! ShopViewController
+        
+        destinationVC.viewControllerClass = self
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
@@ -26,17 +45,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func catDidClick(_ sender: Any) {
-        coins += level
-        coinLabel.text = "Coins: \(coins)"
-    }
-    @IBAction func upgradeButtonDidClick(_ sender: Any) {
-        if coins >= (level * 2) {
-            coins -= (level * 2)
-            coinLabel.text = "Coins: \(coins)"
-            level += 1
-            costLabel.text = "Upgrade 1 Cost: \(cost)"
-        }
-        
+        incrementCoins(increment: cpc)
     }
     
     @IBAction func shopButtonDidClick(_ sender: Any) {
