@@ -10,16 +10,22 @@ import UIKit
 protocol ViewControllerDelegate: AnyObject {
     func upgrade(coinDecrement: Int, cpcIncrement: Int)
     func getCoins() -> Int
+    func resetcoinsVC()
 }
 
 
 class ViewController: UIViewController, ViewControllerDelegate {
+    
+    
     var coins: Int = 0
     var cpc: Int = 1
     @IBOutlet weak var catButton: UIButton!
     @IBOutlet weak var coinLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
     
+    func resetcoinsVC() {
+        coinLabel.text = "Coins: \(coins)"
+    }
     func getCoins() -> Int{
         return coins
     }
@@ -40,8 +46,6 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        //catButton.currentImage = UIImage(named: "cat")
     }
 
     @IBAction func catDidClick(_ sender: Any) {

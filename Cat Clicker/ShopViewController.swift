@@ -13,18 +13,36 @@ class ShopViewController: UIViewController{
     
     
     weak var viewControllerClass: ViewControllerDelegate?
+    func refreshCoins(){
+        if let coins = viewControllerClass?.getCoins(){
+        coinLabel.text = "Coins: \(coins)"
+    }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let coins = viewControllerClass?.getCoins(){
-        coinLabel.text = "Coins: \(coins)"
+        refreshCoins()
         }
         // Do any additional setup after loading the view.
+    override func viewWillDisappear(_ animated: Bool) {
+        viewControllerClass?.resetcoinsVC()
+    }
+    @IBAction func wellFedButtonDidTouch(_ sender: Any) {
+        if let coins = viewControllerClass?.getCoins(){
+        if  coins >= 10 {
+            viewControllerClass?.upgrade(coinDecrement: 10, cpcIncrement: 1)
+        }
+        refreshCoins()
+    }
     }
     
-    
     @IBAction func explodeButtonDidTouch(_ sender: Any) {
-        
+        if let coins = viewControllerClass?.getCoins(){
+        if  coins >= 500 {
+            viewControllerClass?.upgrade(coinDecrement: 500, cpcIncrement: 100)
+        }
+        refreshCoins()
+    }
     }
     
     
