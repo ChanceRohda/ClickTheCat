@@ -11,6 +11,7 @@ class ShopViewController: UIViewController{
     
     @IBOutlet weak var coinLabel: UILabel!
     
+    @IBOutlet weak var explodeButton: UIButton!
     
     weak var viewControllerClass: ViewControllerDelegate?
     func refreshCoins(){
@@ -22,11 +23,13 @@ class ShopViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshCoins()
+        //explodeButton.tintColor = UIColor.white
         }
         // Do any additional setup after loading the view.
     override func viewWillDisappear(_ animated: Bool) {
         viewControllerClass?.resetcoinsVC()
     }
+    
     @IBAction func wellFedButtonDidTouch(_ sender: Any) {
         if let coins = viewControllerClass?.getCoins(){
         if  coins >= 10 {
@@ -38,13 +41,17 @@ class ShopViewController: UIViewController{
     
     @IBAction func explodeButtonDidTouch(_ sender: Any) {
         if let coins = viewControllerClass?.getCoins(){
-        if  coins >= 500 {
-            viewControllerClass?.upgrade(coinDecrement: 500, cpcIncrement: 100)
-        }
-        refreshCoins()
-    }
+                if  coins >= 500 {
+                    viewControllerClass?.upgrade(coinDecrement: 500, cpcIncrement: 60)
+                }
+                refreshCoins()
+            }
+
     }
     
+    @IBAction func backButtonDidTouch(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
             // MARK: - Navigation

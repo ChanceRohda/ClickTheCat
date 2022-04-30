@@ -18,6 +18,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     
     
     var coins: Int = 0
+    
     var cpc: Int = 1
     @IBOutlet weak var catButton: UIButton!
     @IBOutlet weak var coinLabel: UILabel!
@@ -38,14 +39,18 @@ class ViewController: UIViewController, ViewControllerDelegate {
         coinLabel.text = "Coins: \(coins)"
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! ShopViewController
-        
-        destinationVC.viewControllerClass = self
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let destinationVC = segue.destination as? ShopViewController {
+            destinationVC.viewControllerClass = self
+        }
+        if let destinationVC = segue.destination as? CrateShopViewController {
+            destinationVC.viewControllerClass = self
+        }
     }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+        let cat = UIImage (named: "cat")
+        catButton.setImage(cat, for: .normal)
     }
 
     @IBAction func catDidClick(_ sender: Any) {
@@ -56,6 +61,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
         performSegue(withIdentifier: "shopSegue", sender: nil)
     }
     
+    @IBAction func crateShopButtonDidClick(_ sender: Any) {
+        performSegue(withIdentifier: "crateShopSegue", sender: nil)
+    }
     
 }
 

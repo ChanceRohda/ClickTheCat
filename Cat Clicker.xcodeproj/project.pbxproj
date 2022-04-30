@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F07A5142810E2D800DB4A93 /* CrateShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */; };
 		1FD8F3E127E94CCB00D62D45 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */; };
 		1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76427DD290E009C7770 /* AppDelegate.swift */; };
 		1FE5C76727DD290E009C7770 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76627DD290E009C7770 /* SceneDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrateShopViewController.swift; sourceTree = "<group>"; };
 		1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		1FE5C76127DD290E009C7770 /* Cat Clicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cat Clicker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE5C76427DD290E009C7770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				1FE5C76627DD290E009C7770 /* SceneDelegate.swift */,
 				1FE5C76827DD290E009C7770 /* ViewController.swift */,
 				1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */,
+				1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */,
 				1FE5C76A27DD290E009C7770 /* Main.storyboard */,
 				1FE5C76D27DD290E009C7770 /* Assets.xcassets */,
 				1FE5C76F27DD290E009C7770 /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FD8F3E127E94CCB00D62D45 /* ShopViewController.swift in Sources */,
+				1F07A5142810E2D800DB4A93 /* CrateShopViewController.swift in Sources */,
 				1FE5C76927DD290E009C7770 /* ViewController.swift in Sources */,
 				1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */,
 				1FE5C76727DD290E009C7770 /* SceneDelegate.swift in Sources */,
@@ -296,6 +300,7 @@
 				DEVELOPMENT_TEAM = LRGPA678UA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cat Clicker/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = CatClick;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -326,6 +331,7 @@
 				DEVELOPMENT_TEAM = LRGPA678UA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cat Clicker/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = CatClick;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
