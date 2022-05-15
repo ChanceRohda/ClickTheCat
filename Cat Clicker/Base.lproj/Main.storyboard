@@ -105,7 +105,7 @@
                     <navigationItem key="navigationItem" id="Ibl-hl-1pW">
                         <barButtonItem key="leftBarButtonItem" title="Cats" id="UNn-lW-LON">
                             <connections>
-                                <action selector="catMenuButtonDidClick:" destination="BYZ-38-t0r" id="Soc-ub-YSY"/>
+                                <action selector="catMenuButtonDidClick:" destination="BYZ-38-t0r" id="ksf-kl-yQJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
