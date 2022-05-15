@@ -49,9 +49,7 @@ class ShopViewController: UIViewController{
 
     }
     
-    @IBAction func backButtonDidTouch(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
+    
     
     
             // MARK: - Navigation
