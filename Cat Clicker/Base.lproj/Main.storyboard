@@ -24,13 +24,13 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="y7P-zv-Yll"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="orangecat" title=" " imagePadding="0.0"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Orange" title=" " imagePadding="0.0"/>
                                 <connections>
                                     <action selector="catDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dWH-B2-PKo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cat Clicker!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vY0-cN-wFc">
-                                <rect key="frame" x="108" y="105" width="199" height="47"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CatClick!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vY0-cN-wFc">
+                                <rect key="frame" x="132.5" y="105" width="149" height="47"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="43"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -74,21 +74,20 @@
                                     </attributedString>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="crateShopButtonDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FAh-YK-Uig"/>
+                                    <action selector="crateShopButtonDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nYa-dt-ddl"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="0.89114779478561057" blue="0.80481907216667703" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="44e-lw-WQv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="4Wj-w3-K9Y"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="44e-lw-WQv" secondAttribute="trailing" constant="25" id="5rV-8R-ZPe"/>
+                            <constraint firstItem="vY0-cN-wFc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Jr-Jr-AB8"/>
                             <constraint firstItem="44e-lw-WQv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="8jg-7r-0VR"/>
                             <constraint firstItem="jy3-Vq-mIp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="A2Z-57-RaO"/>
-                            <constraint firstItem="vY0-cN-wFc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="108" id="Ctz-ES-L8m"/>
                             <constraint firstItem="jy3-Vq-mIp" firstAttribute="top" secondItem="44e-lw-WQv" secondAttribute="bottom" constant="72" id="EcZ-Lw-8H6"/>
                             <constraint firstItem="xFn-ci-AU6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142.5" id="IAI-OV-Ibx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vY0-cN-wFc" secondAttribute="trailing" constant="107" id="LN8-9g-RRn"/>
                             <constraint firstItem="44e-lw-WQv" firstAttribute="top" secondItem="vY0-cN-wFc" secondAttribute="bottom" constant="86" id="Ofw-y7-W3m"/>
                             <constraint firstItem="xFn-ci-AU6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R6r-sn-deS"/>
                             <constraint firstItem="44e-lw-WQv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="TP0-Z6-OFd"/>
@@ -103,10 +102,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ibl-hl-1pW">
-                        <barButtonItem key="leftBarButtonItem" title="Cats" id="UNn-lW-LON">
-                            <connections>
-                                <action selector="catMenuButtonDidClick:" destination="BYZ-38-t0r" id="ksf-kl-yQJ"/>
-                            </connections>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Cat Menu!" image="book.fill" catalog="system" width="51" style="plain" id="UNn-lW-LON">
+                                <inset key="imageInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="catMenuButtonDidClick:" destination="BYZ-38-t0r" id="ksf-kl-yQJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="paintpalette.fill" catalog="system" id="OU6-Dk-sxI">
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gearshape.fill" catalog="system" id="Ai6-F8-4Qj">
+                            <color key="tintColor" systemColor="systemGray2Color"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -146,7 +155,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" cornerStyle="dynamic" titleAlignment="center">
+                                <buttonConfiguration key="configuration" style="plain" subtitle="Cost: 500 Coins" cornerStyle="dynamic" titleAlignment="center">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Explode-O-Cat">
                                             <attributes>
@@ -155,14 +164,7 @@
                                             </attributes>
                                         </fragment>
                                     </attributedString>
-                                    <attributedString key="attributedSubtitle">
-                                        <fragment content="Cost: 500 Coins">
-                                            <attributes>
-                                                <font key="NSFont" size="21" name="MarkerFelt-Thin"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <fontDescription key="subtitleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="21"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="explodeButtonDidTouch:" destination="noV-kn-ymG" eventType="touchUpInside" id="q5c-OT-Cf4"/>
@@ -173,7 +175,7 @@
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" cornerStyle="dynamic" titleAlignment="center">
+                                <buttonConfiguration key="configuration" style="plain" subtitle="Cost: 10 Coins" cornerStyle="dynamic" titleAlignment="center">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Well Fed Cat">
                                             <attributes>
@@ -182,14 +184,7 @@
                                             </attributes>
                                         </fragment>
                                     </attributedString>
-                                    <attributedString key="attributedSubtitle">
-                                        <fragment content="Cost: 10 Coins">
-                                            <attributes>
-                                                <font key="NSFont" size="21" name="MarkerFelt-Thin"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <fontDescription key="subtitleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="21"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="wellFedButtonDidTouch:" destination="noV-kn-ymG" eventType="touchUpInside" id="dp2-xt-Ea2"/>
@@ -206,7 +201,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gGX-ez-F2X"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="0.89114779479999995" blue="0.80481907220000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="PJk-bS-P0p" firstAttribute="centerX" secondItem="Ii3-Tb-HUm" secondAttribute="centerX" id="3jZ-e2-5JD"/>
                             <constraint firstItem="qUh-f6-9Qt" firstAttribute="centerX" secondItem="Ii3-Tb-HUm" secondAttribute="centerX" id="3qh-TQ-2e1"/>
@@ -258,7 +253,7 @@
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" titleAlignment="center">
+                                <buttonConfiguration key="configuration" style="plain" subtitle="Cost: 1000 Coins" titleAlignment="center">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Basic Crate">
                                             <attributes>
@@ -267,30 +262,48 @@
                                             </attributes>
                                         </fragment>
                                     </attributedString>
-                                    <attributedString key="attributedSubtitle">
-                                        <fragment content="Cost: 1000 Coins">
-                                            <attributes>
-                                                <font key="NSFont" size="21" name="MarkerFelt-Thin"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <fontDescription key="subtitleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="21"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="basicCrateButtonDidTouch:" destination="u9C-C2-mcm" eventType="touchUpInside" id="uZv-bp-KsA"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vE-vV-4jX">
+                                <rect key="frame" x="109" y="411" width="196" height="80"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="gGN-Wd-gbm"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" subtitle="Cost: 50000 Coins" titleAlignment="center">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Cool Crate">
+                                            <attributes>
+                                                <font key="NSFont" size="38" name="MarkerFelt-Thin"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <fontDescription key="subtitleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="21"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="coolCrateButtonDidTouch:" destination="u9C-C2-mcm" eventType="touchUpInside" id="Q4K-k1-5xP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DCm-9A-ad6"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="0.89114779479999995" blue="0.80481907220000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="Jrv-qh-n8c" firstAttribute="top" secondItem="GOE-kS-5Im" secondAttribute="top" constant="68" id="9kN-E9-Y6V"/>
                             <constraint firstItem="e29-n5-alC" firstAttribute="centerX" secondItem="GOE-kS-5Im" secondAttribute="centerX" id="Mqc-jh-h51"/>
                             <constraint firstItem="Dl8-Sv-bkz" firstAttribute="top" secondItem="Jrv-qh-n8c" secondAttribute="bottom" constant="39" id="QkB-yH-Wat"/>
                             <constraint firstItem="TG7-hM-vuM" firstAttribute="top" secondItem="Dl8-Sv-bkz" secondAttribute="bottom" constant="30" id="WaH-CY-Wpe"/>
                             <constraint firstItem="Dl8-Sv-bkz" firstAttribute="centerX" secondItem="GOE-kS-5Im" secondAttribute="centerX" id="c6O-we-cRK"/>
+                            <constraint firstItem="4vE-vV-4jX" firstAttribute="top" secondItem="e29-n5-alC" secondAttribute="bottom" constant="46" id="cH2-9n-wz4"/>
                             <constraint firstItem="TG7-hM-vuM" firstAttribute="centerX" secondItem="GOE-kS-5Im" secondAttribute="centerX" id="fF3-wW-974"/>
+                            <constraint firstItem="4vE-vV-4jX" firstAttribute="leading" secondItem="DCm-9A-ad6" secondAttribute="leading" constant="109" id="fqj-qu-rs1"/>
                             <constraint firstItem="Jrv-qh-n8c" firstAttribute="centerX" secondItem="GOE-kS-5Im" secondAttribute="centerX" id="gJW-Ml-uzC"/>
+                            <constraint firstItem="DCm-9A-ad6" firstAttribute="trailing" secondItem="4vE-vV-4jX" secondAttribute="trailing" constant="109" id="kJZ-se-hre"/>
                             <constraint firstItem="e29-n5-alC" firstAttribute="top" secondItem="TG7-hM-vuM" secondAttribute="bottom" constant="46" id="r3D-JJ-4yy"/>
                         </constraints>
                     </view>
@@ -315,7 +328,8 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="udP-G1-Brd">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="1" green="0.89114779479999995" blue="0.80481907220000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexBackgroundColor" red="0.90980392156862744" green="0.84972614045618244" blue="0.79479416766706679" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CatTableViewCell" rowHeight="204" id="0R5-sf-4gP" customClass="CatTableViewCell" customModule="Cat_Clicker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="204"/>
@@ -344,6 +358,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="0Tp-Ad-iuX" firstAttribute="top" secondItem="jl5-TU-Q5B" secondAttribute="bottom" constant="60" id="4Nu-Ni-ID1"/>
                                                 <constraint firstItem="jl5-TU-Q5B" firstAttribute="top" secondItem="KFZ-IV-RNZ" secondAttribute="top" constant="40" id="Bkp-gQ-JIg"/>
@@ -355,6 +370,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="0Tp-Ad-iuX" secondAttribute="trailing" constant="10" id="x1w-eZ-6bC"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.89114779479999995" blue="0.80481907220000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="1" green="0.89114779479999995" blue="0.80481907220000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="catDescriptionLabel" destination="0Tp-Ad-iuX" id="I9m-7i-VcW"/>
                                             <outlet property="catImageView" destination="wa1-PA-Mma" id="3ZC-eu-X9G"/>
@@ -365,7 +382,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="G9X-iL-BrJ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="1" green="0.89114779479999995" blue="0.80481907220000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="udP-G1-Brd" firstAttribute="top" secondItem="G9X-iL-BrJ" secondAttribute="top" id="AnB-Un-9Qm"/>
                             <constraint firstItem="G9X-iL-BrJ" firstAttribute="bottom" secondItem="udP-G1-Brd" secondAttribute="bottom" id="NLB-iz-kIb"/>
@@ -402,9 +419,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="orangecat" width="178" height="164"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <image name="Orange" width="178" height="164"/>
+        <image name="book.fill" catalog="system" width="128" height="95"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <image name="paintpalette.fill" catalog="system" width="128" height="105"/>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

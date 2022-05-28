@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Cat clicker tutorial cat1cat.png",
+      "filename" : "Gray_Cat_CatClick@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "cattutorial2x.png",
+      "filename" : "Gray_Cat_CatClick@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "cattutorial3x.png",
+      "filename" : "Gray_Cat_CatClick@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

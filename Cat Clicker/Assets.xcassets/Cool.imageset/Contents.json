@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Cat clicker catcat copy.png",
+      "filename" : "CoolCatCatClick@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Cat clicker catcat.png",
+      "filename" : "CoolCatCatClick@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Cat clicker catcat-1.png",
+      "filename" : "CoolCatCatClick@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

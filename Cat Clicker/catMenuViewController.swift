@@ -19,6 +19,7 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
     
 
     @IBOutlet weak var tableView: UITableView!
+    weak var viewControllerClass: ViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -40,6 +41,11 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 204
     }
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       let catItem = acquiredCats[indexPath.row]
+       viewControllerClass?.changeSelectedCat(cat: Cat(name: catItem.name, description: catItem.description, image: catItem.image))
+       
+   }
 
     /*
     // MARK: - Navigation

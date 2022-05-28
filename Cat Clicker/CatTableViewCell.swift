@@ -17,6 +17,7 @@ class CatTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .blue
         // Initialization code
     }
 
