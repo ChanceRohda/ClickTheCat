@@ -1,23 +1,19 @@
 //
-//  CatTableViewCell.swift
+//  CrateTableViewCell.swift
 //  Cat Clicker
 //
-//  Created by Chance Rohda on 5/15/22.
+//  Created by Chance Rohda on 6/25/22.
 //
 
 import UIKit
 
-class CatTableViewCell: UITableViewCell {
+class CrateTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var catNameLabel: UILabel!
-    
-    @IBOutlet weak var catImageView: UIImageView!
-    
-    @IBOutlet weak var catDescriptionLabel: UILabel!
-    
+    @IBOutlet weak var crateImageView: UIImageView!
+    @IBOutlet weak var crateNameLabel: UILabel!
+    @IBOutlet weak var crateCostLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         // Initialization code
     }
 

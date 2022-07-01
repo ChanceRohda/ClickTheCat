@@ -16,6 +16,7 @@ protocol ViewControllerDelegate: AnyObject {
     func zeroCoins()
     func changeSelectedCat(cat: Cat)
     func getSelectedCat() -> String
+    func increaseCps(amount: Int)
 }
 
 
@@ -25,10 +26,12 @@ class ViewController: UIViewController, ViewControllerDelegate {
     var coins: Int = 0
     var acquiredCats = [Cat(name: "Orange", description: "Does Nothing", image: UIImage(named: "Orange")!)]
     var selectedCat = "Orange"
-    var cpc: Int = 1
+    var cpc: Int = 500000
+    var cps: Int = 0
+    var timerIncrement: Double = 5
     @IBOutlet weak var catButton: UIButton!
     @IBOutlet weak var coinLabel: UILabel!
-    @IBOutlet weak var costLabel: UILabel!
+    
     func getSelectedCat() -> String {
         return selectedCat
     }
@@ -55,9 +58,14 @@ class ViewController: UIViewController, ViewControllerDelegate {
         coins += increment
         coinLabel.text = "Coins: \(coins)"
     }
+    func increaseCps(amount: Int) {
+        cps += amount
+    }
     func changeSelectedCat(cat: Cat) {
         selectedCat = cat.name
     }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? ShopViewController {
             destinationVC.viewControllerClass = self
@@ -74,7 +82,8 @@ class ViewController: UIViewController, ViewControllerDelegate {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //callcps()
+        Timer.scheduledTimer(timeInterval: timerIncrement, target: self, selector: #selector(callcps), userInfo: nil, repeats: true)
     }
     override func viewWillAppear(_ animated: Bool) {
         catButton.setImage(UIImage(named: selectedCat), for: .normal)
@@ -83,10 +92,19 @@ class ViewController: UIViewController, ViewControllerDelegate {
     @IBAction func catDidClick(_ sender: Any) {
         incrementCoins(increment: cpc)
         if selectedCat == "Gray" {
-            incrementCoins(increment: 50)
+            let grayCpC: Double = (Double(cpc) * 0.05)
+            incrementCoins(increment: Int(round((grayCpC))))
         }
     }
-    
+    @objc func callcps() {
+       // DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+       //     self.coins += self.cps
+       //     self.resetcoinsVC()
+       //     self.callcps()
+       // }
+        self.coins += cps
+        self.resetcoinsVC()
+    }
     @IBAction func shopButtonDidClick(_ sender: Any) {
         performSegue(withIdentifier: "shopSegue", sender: nil)
     }
@@ -94,10 +112,6 @@ class ViewController: UIViewController, ViewControllerDelegate {
     @IBAction func crateShopButtonDidClick(_ sender: Any) {
         performSegue(withIdentifier: "crateShopSegue", sender: nil)
     }
-    
-        
-    
-    
     @IBAction func catMenuButtonDidClick(_ sender: Any) {
         performSegue(withIdentifier: "catMenuSegue", sender: nil)
     }

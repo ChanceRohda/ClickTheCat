@@ -17,6 +17,9 @@ class ShopViewController: UIViewController{
     func refreshCoins(){
         if let coins = viewControllerClass?.getCoins(){
         coinLabel.text = "Coins: \(coins)"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                 self.refreshCoins()
+             }
     }
     }
     
@@ -35,7 +38,7 @@ class ShopViewController: UIViewController{
         if  coins >= 10 {
             viewControllerClass?.upgrade(coinDecrement: 10, cpcIncrement: 1)
         }
-        refreshCoins()
+        
     }
     }
     
@@ -44,7 +47,7 @@ class ShopViewController: UIViewController{
                 if  coins >= 500 {
                     viewControllerClass?.upgrade(coinDecrement: 500, cpcIncrement: 60)
                 }
-                refreshCoins()
+                
             }
 
     }

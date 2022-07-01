@@ -10,6 +10,7 @@
 		1F07A5142810E2D800DB4A93 /* CrateShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */; };
 		1F07A518282C79F400DB4A93 /* catMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F07A517282C79F400DB4A93 /* catMenuViewController.swift */; };
 		1F07A51A2831512F00DB4A93 /* CatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F07A5192831512F00DB4A93 /* CatTableViewCell.swift */; };
+		1F4C006828678A9900FB89D8 /* CrateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C006728678A9900FB89D8 /* CrateTableViewCell.swift */; };
 		1FD8F3E127E94CCB00D62D45 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */; };
 		1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76427DD290E009C7770 /* AppDelegate.swift */; };
 		1FE5C76727DD290E009C7770 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76627DD290E009C7770 /* SceneDelegate.swift */; };
@@ -23,11 +24,12 @@
 		1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrateShopViewController.swift; sourceTree = "<group>"; };
 		1F07A517282C79F400DB4A93 /* catMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catMenuViewController.swift; sourceTree = "<group>"; };
 		1F07A5192831512F00DB4A93 /* CatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatTableViewCell.swift; sourceTree = "<group>"; };
+		1F4C006728678A9900FB89D8 /* CrateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrateTableViewCell.swift; sourceTree = "<group>"; };
 		1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		1FE5C76127DD290E009C7770 /* Cat Clicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cat Clicker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE5C76427DD290E009C7770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FE5C76627DD290E009C7770 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1FE5C76827DD290E009C7770 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1FE5C76827DD290E009C7770 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		1FE5C76B27DD290E009C7770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1FE5C76D27DD290E009C7770 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FE5C77027DD290E009C7770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */,
 				1F07A517282C79F400DB4A93 /* catMenuViewController.swift */,
 				1F07A5192831512F00DB4A93 /* CatTableViewCell.swift */,
+				1F4C006728678A9900FB89D8 /* CrateTableViewCell.swift */,
 				1FE5C76A27DD290E009C7770 /* Main.storyboard */,
 				1FE5C76D27DD290E009C7770 /* Assets.xcassets */,
 				1FE5C76F27DD290E009C7770 /* LaunchScreen.storyboard */,
@@ -155,6 +158,7 @@
 				1F07A5142810E2D800DB4A93 /* CrateShopViewController.swift in Sources */,
 				1FE5C76927DD290E009C7770 /* ViewController.swift in Sources */,
 				1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */,
+				1F4C006828678A9900FB89D8 /* CrateTableViewCell.swift in Sources */,
 				1F07A518282C79F400DB4A93 /* catMenuViewController.swift in Sources */,
 				1FE5C76727DD290E009C7770 /* SceneDelegate.swift in Sources */,
 			);
