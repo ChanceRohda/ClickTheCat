@@ -18,6 +18,7 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
 
+    @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     weak var viewControllerClass: ViewControllerDelegate?
     override func viewDidLoad() {
@@ -47,14 +48,24 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
        
    }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func enterCodeButtonDidTouch(_ sender: Any) {
+        var code: String = codeTextField.text ?? "CatClick"
+        var catList = viewControllerClass?.getCatList()
+        if code == "1033" && !catList!.contains(where: { cat in
+            return cat.name == "Cat Food Cat"
+        }){
+            viewControllerClass?.addCat(cat: Cat(name: "Cat Food Cat", description: "Cat Food Upgrades +Autocoin", image: UIImage(named: "Cat Food Cat")!))
+            acquiredCats = (viewControllerClass?.getCatList())!
+            tableView.reloadData()
+            codeTextField.text = ""
+        } else {
+            let alert = UIAlertController(title: "Nope!", message: "That's not a valid code.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default) { action in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
     }
-    */
-
+    
 }

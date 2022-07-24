@@ -7,6 +7,12 @@
 
 import UIKit
 
+struct Achievement {
+    var completedImage: UIImage
+    var description: String
+    var isComplete: Bool
+}
+
 protocol ViewControllerDelegate: AnyObject {
     func upgrade(coinDecrement: Int, cpcIncrement: Int)
     func getCoins() -> Int
@@ -17,26 +23,50 @@ protocol ViewControllerDelegate: AnyObject {
     func changeSelectedCat(cat: Cat)
     func getSelectedCat() -> String
     func increaseCps(amount: Int)
+    func zeroCpC()
+    func getTotalClicks() -> Int
+    func getAchievements() -> [Achievement]
 }
 
 
 class ViewController: UIViewController, ViewControllerDelegate {
     
     
+    
+    
+    
+    
     var coins: Int = 0
     var acquiredCats = [Cat(name: "Orange", description: "Does Nothing", image: UIImage(named: "Orange")!)]
     var selectedCat = "Orange"
-    var cpc: Int = 500000
+    var cpc: Int = 1
     var cps: Int = 0
     var timerIncrement: Double = 5
-    @IBOutlet weak var catButton: UIButton!
+    var clicks: Int = 970
+    var achievements: [Achievement] = [Achievement(completedImage: UIImage(named: "Alien Cat")!, description: "Click 1000 Times", isComplete: false), Achievement(completedImage: UIImage(named: "Time Cat")!, description: "Click 1 Million Times", isComplete: false)]
+    
+    
     @IBOutlet weak var coinLabel: UILabel!
+    @IBOutlet weak var dogRewardLabel: UILabel!
+    @IBOutlet weak var catImageView: UIImageView!
     
     func getSelectedCat() -> String {
         return selectedCat
     }
     func zeroCoins() {
-        coins = 0
+        if coins < 0 {
+            coins = 0
+        }
+        
+    }
+    func getAchievements() -> [Achievement] {
+        return achievements
+    }
+    func zeroCpC() {
+        if cpc < 1 {
+            cpc = 1
+        }
+        
     }
     func getCatList() -> [Cat] {
         return acquiredCats
@@ -64,6 +94,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
     func changeSelectedCat(cat: Cat) {
         selectedCat = cat.name
     }
+    func getTotalClicks() -> Int {
+        return clicks
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -71,6 +104,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
             destinationVC.viewControllerClass = self
         }
         if let destinationVC = segue.destination as? CrateShopViewController {
+            destinationVC.viewControllerClass = self
+        }
+        if let destinationVC = segue.destination as? StatsAchievementsViewController {
             destinationVC.viewControllerClass = self
         }
         if let destinationVC = segue.destination as? catMenuViewController {
@@ -84,17 +120,67 @@ class ViewController: UIViewController, ViewControllerDelegate {
         super.viewDidLoad()
         //callcps()
         Timer.scheduledTimer(timeInterval: timerIncrement, target: self, selector: #selector(callcps), userInfo: nil, repeats: true)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(catDidClick(_:)))
+        catImageView.addGestureRecognizer(tap)
+        catImageView.isUserInteractionEnabled = true
     }
     override func viewWillAppear(_ animated: Bool) {
-        catButton.setImage(UIImage(named: selectedCat), for: .normal)
+        dogRewardLabel.text = ""
+        catImageView.image = UIImage(named: selectedCat)
     }
 
-    @IBAction func catDidClick(_ sender: Any) {
-        incrementCoins(increment: cpc)
-        if selectedCat == "Gray" {
-            let grayCpC: Double = (Double(cpc) * 0.05)
-            incrementCoins(increment: Int(round((grayCpC))))
+    @objc func catDidClick(_ sender: Any) {
+        if clicks > 999 && !acquiredCats.contains(where: { cat in
+            return cat.name == "Alien Cat"
+        }){
+            achievements[0].isComplete = true
+            addCat(cat: Cat(name: "Alien Cat", description: "x1.5 CpC", image: UIImage(named: "Alien Cat")!))
         }
+        if clicks > 999999 && !acquiredCats.contains(where: { cat in
+            return cat.name == "Time Cat"
+        }){
+            achievements[1].isComplete = true
+            addCat(cat: Cat(name: "Time Cat", description: "x3 CpC, x3 Autocoin", image: UIImage(named: "Time Cat")!))
+        }
+        dogRewardLabel.text = ""
+        incrementCoins(increment: cpc)
+        clicks += 1
+        
+        if selectedCat == "Time Cat"{
+            incrementCoins(increment: cpc)
+            incrementCoins(increment: cpc)
+        }
+        if selectedCat == "Alien Cat"{
+            let grayCps: Double = (Double(cpc) * 0.5)
+            incrementCoins(increment: Int(round((grayCps))))
+        }
+        if selectedCat == "Dog" {
+            var dogTreasure: [String] = ["Treasure!"]
+            for _ in 1...50 {
+                dogTreasure.append("Nope")
+            }
+            var dogReward = dogTreasure.randomElement()
+            if dogReward == "Treasure!" {
+                dogReward = dogTreasure.randomElement()
+                if dogReward == "Treasure!" && !acquiredCats.contains(where: { cat in
+                    return cat.name == "Easter Egg"
+                }){
+                    addCat(cat: Cat(name: "Easter Egg", description: "You found the Easter Egg!", image: UIImage(named: "Easter Egg")!))
+                    dogRewardLabel.text = "Dog found the Easter Egg!"
+                } else {
+                    
+                        let dogCps: Double = (Double(cps) * 0.1)
+                        increaseCps(amount: Int(round((dogCps))))
+                    
+                    resetcoinsVC()
+                    dogRewardLabel.text = "Dog found some Autocoin!"
+                }
+            }
+            
+        }
+        
+        
+        
     }
     @objc func callcps() {
        // DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -103,6 +189,14 @@ class ViewController: UIViewController, ViewControllerDelegate {
        //     self.callcps()
        // }
         self.coins += cps
+        if selectedCat == "Gray" {
+            let grayCps: Double = (Double(cps) * 0.05)
+            incrementCoins(increment: Int(round((grayCps))))
+        }
+        if selectedCat == "Time Cat" {
+            self.coins += cps
+            self.coins += cps
+        }
         self.resetcoinsVC()
     }
     @IBAction func shopButtonDidClick(_ sender: Any) {
@@ -115,5 +209,11 @@ class ViewController: UIViewController, ViewControllerDelegate {
     @IBAction func catMenuButtonDidClick(_ sender: Any) {
         performSegue(withIdentifier: "catMenuSegue", sender: nil)
     }
+    
+    @IBAction func statsAchievementsButtonDidClick(_ sender: Any) {
+        performSegue(withIdentifier: "statsAchievementsSegue", sender: nil)
+    }
+    
+    
 }
 
