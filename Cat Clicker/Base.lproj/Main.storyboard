@@ -135,6 +135,12 @@
                                     <action selector="statsAchievementsButtonDidClick:" destination="BYZ-38-t0r" id="RHm-Eq-VAy"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="Item" image="dollarsign.circle" catalog="system" id="oUd-4W-oIx">
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="adButtonDidTouch:" destination="BYZ-38-t0r" id="UtE-Mz-eLj"/>
+                                </connections>
+                            </barButtonItem>
                         </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gearshape.fill" catalog="system" id="Ai6-F8-4Qj">
                             <color key="tintColor" systemColor="systemGray2Color"/>
@@ -148,6 +154,7 @@
                         <segue destination="u9C-C2-mcm" kind="show" identifier="crateShopSegue" id="9mB-2P-HVf"/>
                         <segue destination="vvq-1K-r33" kind="show" identifier="catMenuSegue" id="ih1-7Y-5Ta"/>
                         <segue destination="F2N-n0-6Uu" kind="show" identifier="statsAchievementsSegue" id="isW-Tp-i3N"/>
+                        <segue destination="3Bq-kq-Cu8" kind="show" identifier="adVCSegue" id="Kou-X9-bep"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -376,6 +383,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lxF-uc-WQo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1006" y="-208"/>
+        </scene>
+        <!--Ad View Controller-->
+        <scene sceneID="VbQ-EX-TTh">
+            <objects>
+                <viewController storyboardIdentifier="AdViewController" id="3Bq-kq-Cu8" customClass="AdViewController" customModule="Cat_Clicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7SF-9x-JDk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ad Points: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ey-YO-XAs">
+                                <rect key="frame" x="166.5" y="437.5" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3H-2G-gUL">
+                                <rect key="frame" x="152.5" y="128" width="109" height="31"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Watch an ad."/>
+                                <connections>
+                                    <action selector="adButton:" destination="3Bq-kq-Cu8" eventType="touchUpInside" id="fhE-OO-Sqo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Nts-6A-s1u"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="w3H-2G-gUL" firstAttribute="centerX" secondItem="7SF-9x-JDk" secondAttribute="centerX" id="6GG-XC-yMK"/>
+                            <constraint firstItem="1ey-YO-XAs" firstAttribute="centerX" secondItem="7SF-9x-JDk" secondAttribute="centerX" id="CzR-l3-oiV"/>
+                            <constraint firstItem="w3H-2G-gUL" firstAttribute="top" secondItem="Nts-6A-s1u" secondAttribute="top" constant="40" id="K77-Jh-MAc"/>
+                            <constraint firstItem="1ey-YO-XAs" firstAttribute="centerY" secondItem="7SF-9x-JDk" secondAttribute="centerY" id="NVt-ux-5EM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="A8E-2S-zic"/>
+                    <connections>
+                        <outlet property="AdPointsLabel" destination="1ey-YO-XAs" id="8or-Z7-TT4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="icH-wP-Yq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-410.14492753623193" y="1272.9910714285713"/>
         </scene>
         <!--Crate Shop View Controller-->
         <scene sceneID="4rm-o0-llh">
@@ -629,6 +678,7 @@
         <image name="Orange" width="178" height="164"/>
         <image name="book.fill" catalog="system" width="128" height="95"/>
         <image name="chart.bar.xaxis" catalog="system" width="128" height="98"/>
+        <image name="dollarsign.circle" catalog="system" width="128" height="121"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

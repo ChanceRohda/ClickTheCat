@@ -114,6 +114,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
             
             destinationVC.viewControllerClass = self
         }
+        if let destinationVC = segue.destination as? AdViewController {
+            destinationVC.viewControllerClass = self
+        }
     }
   
     override func viewDidLoad() {
@@ -212,6 +215,10 @@ class ViewController: UIViewController, ViewControllerDelegate {
     
     @IBAction func statsAchievementsButtonDidClick(_ sender: Any) {
         performSegue(withIdentifier: "statsAchievementsSegue", sender: nil)
+    }
+    
+    @IBAction func adButtonDidTouch(_ sender: Any) {
+        performSegue(withIdentifier: "adSegue", sender: nil)
     }
     
     
