@@ -16,10 +16,16 @@ import UIKit
 class StatsAchievementsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var totalClicksLabel: UILabel!
+    @IBOutlet weak var adsWatchedLabel: UILabel!
+    @IBOutlet weak var catsEarnedLabel: UILabel!
+    @IBOutlet weak var achievementInfoLabel: UILabel!
+    weak var viewControllerClass: ViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        var adsWatched: Int = (viewControllerClass?.getAdPoints())!
+        adsWatchedLabel.text = "Ads Watched: \(adsWatched)"
         collectionView.dataSource = self
         collectionView.delegate = self
         var catsEarned: Int = (viewControllerClass?.getCatList().count)!
@@ -55,16 +61,6 @@ class StatsAchievementsViewController: UIViewController, UICollectionViewDelegat
         var achievements = viewControllerClass?.getAchievements()
         achievementInfoLabel.text = achievements![indexPath.row].description
     }
-    
-    @IBOutlet weak var totalClicksLabel: UILabel!
-    @IBOutlet weak var timesPrestigedLabel: UILabel!
-    @IBOutlet weak var catsEarnedLabel: UILabel!
-    @IBOutlet weak var achievementInfoLabel: UILabel!
-    
-    
-    weak var viewControllerClass: ViewControllerDelegate?
-    
-     
         
     
     

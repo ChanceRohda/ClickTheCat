@@ -31,8 +31,8 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var rewardLabel: UILabel!
     @IBOutlet weak var coinLabel: UILabel!
     weak var viewControllerClass: ViewControllerDelegate?
-    var tuna = 0
-    var crates: [Crate] = [Crate(name: "Basic Crate", cost: 1000, displayCost: "1000 Coins", image: UIImage(named: "Gray")!, contents: ["coins", "cat", "cps", "tuna", "negCoins", "negCoins", "Coins", "cpc"], cpsReward: 130, catReward: Cat(name: "Gray", description: "+5% Autocoin", image: UIImage(named: "Gray")!), coinReward: 1500, tunaReward: 1, negativeCoin: 500), Crate(name: "Cool Crate", cost: 50000, displayCost: "50000 Coins", image: UIImage(named: "Cool")!, contents:  ["cps", "cat", "cpc", "tuna", "negCoins", "negCoins", "Coins", "cpc"], cpcReward: 20, cpsReward: 7700, catReward: Cat(name: "Cool", description: "More Autocoin in Crates", image: UIImage(named: "Cool")!), coinReward: 60000, tunaReward: 1, negativeCoin: 1000), Crate(name: "Dog Box", cost: 1000000, displayCost: "1 Million Coins", image: UIImage(named: "Dog")!, contents: ["cpc", "cat", "cps", "tuna", "negCpc", "negCpc", "cps", "cpc"], cpcReward: 200, cpsReward: 10000, catReward: Cat(name: "Dog", description: "Might dig up treasure!", image: UIImage(named: "Dog")!), coinReward: 1100000, tunaReward: 5, negativeCoin: 0, negativeCpc: 800)]
+    
+    var crates: [Crate] = [Crate(name: "Basic Crate", cost: 1000, displayCost: "1000 Coins", image: UIImage(named: "Gray")!, contents: ["coins", "cat", "cps", "tuna", "negCoins", "coins", "cpc"], cpcReward: 1, cpsReward: 130, catReward: Cat(name: "Gray", description: "+5% Autocoin", image: UIImage(named: "Gray")!), coinReward: 1500, tunaReward: 1, negativeCoin: 500), Crate(name: "Cool Crate", cost: 50000, displayCost: "50000 Coins", image: UIImage(named: "Cool")!, contents:  ["cps", "cat", "cpc", "tuna", "negCoins", "coins", "cpc"], cpcReward: 20, cpsReward: 7700, catReward: Cat(name: "Cool", description: "More Autocoin in Crates", image: UIImage(named: "Cool")!), coinReward: 60000, tunaReward: 1, negativeCoin: 1000), Crate(name: "Dog Box", cost: 1000000, displayCost: "1 Million Coins", image: UIImage(named: "Dog")!, contents: ["cpc", "cat", "cps", "tuna", "negCpc", "cps", "cpc"], cpcReward: 200, cpsReward: 10000, catReward: Cat(name: "Dog", description: "Might dig up treasure!", image: UIImage(named: "Dog")!), coinReward: 1100000, tunaReward: 5, negativeCoin: 0, negativeCpc: 800)]
     
     
     
@@ -93,6 +93,7 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
                         rewardLabel.text = "\(purchasedCrate.coinReward) Coins Acquired!"
                     } else if crateContent == "tuna" {
                         rewardLabel.text = "\(purchasedCrate.tunaReward!) Tuna Acquired!"
+                        viewControllerClass?.increaseTuna(amount: purchasedCrate.tunaReward!)
                     } else if crateContent == "negCoins" {
                         viewControllerClass?.upgrade(coinDecrement: purchasedCrate.negativeCoin!, cpcIncrement: 0)
                         rewardLabel.text = "\(purchasedCrate.negativeCoin!) Coins Lost."

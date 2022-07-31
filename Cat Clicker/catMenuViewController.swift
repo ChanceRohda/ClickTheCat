@@ -58,6 +58,15 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
             acquiredCats = (viewControllerClass?.getCatList())!
             tableView.reloadData()
             codeTextField.text = ""
+        } else if code == "2022" && !catList!.contains(where: { cat in
+            return cat.name == "Gold Cat"
+        }){
+            viewControllerClass?.addCat(cat: Cat(name: "Gold Cat", description: "Ads Give More Gold", image: UIImage(named: "Gold Cat")!))
+            acquiredCats = (viewControllerClass?.getCatList())!
+            tableView.reloadData()
+            codeTextField.text = ""
+            
+            
         } else {
             let alert = UIAlertController(title: "Nope!", message: "That's not a valid code.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default) { action in

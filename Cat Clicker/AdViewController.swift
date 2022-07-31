@@ -4,15 +4,45 @@
 //
 //  Created by Chance Rohda on 7/24/22.
 //
-
+struct Prize {
+    var type: String
+    var amount: Int
+}
 import UIKit
 import GoogleMobileAds
 class AdViewController: UIViewController {
     weak var viewControllerClass: ViewControllerDelegate?
-    @IBOutlet weak var AdPointsLabel: UILabel!
+    @IBOutlet weak var rewardImageView: UIImageView!
+    @IBOutlet weak var rewardLabel: UILabel!
     
+    
+    var possiblePrizes: [Prize] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        let coins = (viewControllerClass?.getCoins())!
+        let autocoin = (viewControllerClass?.getCps())!
+        
+        
+        for _ in 1...70 {
+            possiblePrizes.append(Prize(type: "Coins", amount: Int(round(Double(coins/100)))))
+            possiblePrizes.append(Prize(type: "Coins", amount: 100))
+            possiblePrizes.append(Prize(type: "Coins", amount: Int(round(Double(coins/10)))))
+            possiblePrizes.append(Prize(type: "Tuna", amount: 1))
+            possiblePrizes.append(Prize(type: "Autocoin", amount: Int(round(Double(autocoin/50)))))
+        }
+        for _ in 1...40 {
+            if (viewControllerClass?.getCoins())! > 10000 {
+                possiblePrizes.append(Prize(type: "CpC", amount: 10))
+            }
+            
+            possiblePrizes.append(Prize(type: "Tuna", amount: 5))
+            possiblePrizes.append(Prize(type: "Coins", amount: coins))
+            possiblePrizes.append(Prize(type: "Autocoin", amount: Int(round(Double(autocoin/10)))))
+        }
+        possiblePrizes.append(Prize(type: "Tuna", amount: 100))
+        possiblePrizes.append(Prize(type: "CpC", amount: 100))
+        possiblePrizes.append(Prize(type: "Coins", amount: coins * 2))
+        possiblePrizes.append(Prize(type: "Autocoin", amount: autocoin))
 
         // Do any additional setup after loading the view.
     }
@@ -40,8 +70,10 @@ class AdViewController: UIViewController {
           let reward = ad.adReward
           print("Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
             self.adPoints += 1
+            self.viewControllerClass?.refreshAdPoints(AdPoints: self.adPoints)
+            self.getReward()
             print("Current Ad Points: \(self.adPoints)")
-            self.AdPointsLabel.text = "Ad Points: \(self.adPoints)"
+            
         }
       } else {
         print("Ad wasn't ready")
@@ -51,6 +83,55 @@ class AdViewController: UIViewController {
         loadRewardedAd()
         
     }
-
+    func getReward() {
+            let prize = possiblePrizes.randomElement()
+            if prize?.type == "Coins" {
+                if prize!.amount < 100 {
+                    viewControllerClass?.upgrade(coinDecrement: -100, cpcIncrement: 0)
+                    if viewControllerClass?.getSelectedCat() == "Ad Cat" || viewControllerClass?.getSelectedCat() == "Gold Cat"{
+                        viewControllerClass?.upgrade(coinDecrement: -100, cpcIncrement: 0)
+                    }
+                    if viewControllerClass?.getSelectedCat() == "Ad Cat" || viewControllerClass?.getSelectedCat() == "Gold Cat"{
+                        rewardLabel.text = "You got \(200) coins!"
+                    } else {
+                        rewardLabel.text = "You got \(100) coins!"
+                    }
+                } else {
+                viewControllerClass?.upgrade(coinDecrement: prize!.amount * -1, cpcIncrement: 0)
+                if viewControllerClass?.getSelectedCat() == "Ad Cat" || viewControllerClass?.getSelectedCat() == "Gold Cat"{
+                    viewControllerClass?.upgrade(coinDecrement: prize!.amount * -1, cpcIncrement: 0)
+                }
+                    if viewControllerClass?.getSelectedCat() == "Ad Cat" || viewControllerClass?.getSelectedCat() == "Gold Cat"{
+                        rewardLabel.text = "You got \(prize!.amount * 2) coins!"
+                    } else {
+                        rewardLabel.text = "You got \(prize!.amount) coins!"
+                    }
+                
+                }
+                rewardImageView.image = UIImage(named: "Coin Pile")!
+            } else if prize?.type == "Tuna" {
+                rewardLabel.text = "You got \(prize!.amount) tuna!"
+                rewardImageView.image = UIImage(named: "Tuna")!
+                viewControllerClass?.increaseTuna(amount: prize!.amount)
+            } else if prize?.type == "Autocoin" {
+                viewControllerClass?.increaseCps(amount: prize!.amount)
+                if viewControllerClass?.getSelectedCat() == "Ad Cat" {
+                    
+                }
+                rewardLabel.text = "You got \(prize!.amount) autocoin!"
+                rewardImageView.image = UIImage(named: "Gold Cat")!
+            } else if prize?.type == "CpC" {
+                viewControllerClass?.upgrade(coinDecrement: 0, cpcIncrement: prize!.amount)
+                if viewControllerClass?.getSelectedCat() == "Ad Cat" {
+                    
+                }
+                rewardLabel.text = "You got \(prize!.amount) CpC!"
+                rewardImageView.image = UIImage(named: "CpC+")!
+            }
+        if adPoints == 50 {
+            rewardLabel.text = "Ad Cat Earned"
+        }
+        
+    }
 
 }

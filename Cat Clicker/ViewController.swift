@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import AVFoundation
 struct Achievement {
     var completedImage: UIImage
     var description: String
@@ -26,30 +26,37 @@ protocol ViewControllerDelegate: AnyObject {
     func zeroCpC()
     func getTotalClicks() -> Int
     func getAchievements() -> [Achievement]
+    func getCps() -> Int
+    func increaseTuna(amount: Int)
+    func refreshAdPoints(AdPoints: Int)
+    func getAdPoints() -> Int
 }
 
 
 class ViewController: UIViewController, ViewControllerDelegate {
-    
-    
-    
-    
-    
-    
     var coins: Int = 0
+    var tuna: Int = 0
     var acquiredCats = [Cat(name: "Orange", description: "Does Nothing", image: UIImage(named: "Orange")!)]
     var selectedCat = "Orange"
     var cpc: Int = 1
     var cps: Int = 0
     var timerIncrement: Double = 5
-    var clicks: Int = 970
-    var achievements: [Achievement] = [Achievement(completedImage: UIImage(named: "Alien Cat")!, description: "Click 1000 Times", isComplete: false), Achievement(completedImage: UIImage(named: "Time Cat")!, description: "Click 1 Million Times", isComplete: false)]
-    
+    var clicks: Int = 0
+    var player: AVAudioPlayer?
+    var achievements: [Achievement] = [Achievement(completedImage: UIImage(named: "Alien Cat")!, description: "Click 1000 Times", isComplete: false), Achievement(completedImage: UIImage(named: "Time Cat")!, description: "Click 1 Million Times", isComplete: false), Achievement(completedImage: UIImage(named: "Ad Cat")!, description: "Watch 50 Ads", isComplete: false)]
+    var adPoints = 0
     
     @IBOutlet weak var coinLabel: UILabel!
     @IBOutlet weak var dogRewardLabel: UILabel!
+    @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var catImageView: UIImageView!
     
+    func getAdPoints() -> Int {
+        return adPoints
+    }
+    func refreshAdPoints(AdPoints: Int) {
+       adPoints = AdPoints
+    }
     func getSelectedCat() -> String {
         return selectedCat
     }
@@ -67,6 +74,12 @@ class ViewController: UIViewController, ViewControllerDelegate {
             cpc = 1
         }
         
+    }
+    func increaseTuna(amount: Int) {
+        tuna += amount
+    }
+    func getCps() -> Int {
+        return cps
     }
     func getCatList() -> [Cat] {
         return acquiredCats
@@ -130,21 +143,16 @@ class ViewController: UIViewController, ViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         dogRewardLabel.text = ""
         catImageView.image = UIImage(named: selectedCat)
+        if adPoints >= 50 && !acquiredCats.contains(where: { cat in
+            return cat.name == "Ad Cat"
+        }){
+            achievements[2].isComplete = true
+            addCat(cat: Cat(name: "Ad Cat", description: "More Ad Rewards", image: UIImage(named: "Ad Cat")!))
+        }
     }
 
     @objc func catDidClick(_ sender: Any) {
-        if clicks > 999 && !acquiredCats.contains(where: { cat in
-            return cat.name == "Alien Cat"
-        }){
-            achievements[0].isComplete = true
-            addCat(cat: Cat(name: "Alien Cat", description: "x1.5 CpC", image: UIImage(named: "Alien Cat")!))
-        }
-        if clicks > 999999 && !acquiredCats.contains(where: { cat in
-            return cat.name == "Time Cat"
-        }){
-            achievements[1].isComplete = true
-            addCat(cat: Cat(name: "Time Cat", description: "x3 CpC, x3 Autocoin", image: UIImage(named: "Time Cat")!))
-        }
+        animateCatOnPress()
         dogRewardLabel.text = ""
         incrementCoins(increment: cpc)
         clicks += 1
@@ -181,10 +189,72 @@ class ViewController: UIViewController, ViewControllerDelegate {
             }
             
         }
+        if clicks > 999 && !acquiredCats.contains(where: { cat in
+            return cat.name == "Alien Cat"
+        }){
+            achievements[0].isComplete = true
+            addCat(cat: Cat(name: "Alien Cat", description: "x1.5 CpC", image: UIImage(named: "Alien Cat")!))
+            dogRewardLabel.text = "Alien Cat Earned!"
+        }
+        if clicks > 999999 && !acquiredCats.contains(where: { cat in
+            return cat.name == "Time Cat"
+        }){
+            achievements[1].isComplete = true
+            addCat(cat: Cat(name: "Time Cat", description: "x3 CpC, x3 Autocoin", image: UIImage(named: "Time Cat")!))
+            dogRewardLabel.text = "Time Cat Earned!"
+        }
         
-        
+        playSound()
         
     }
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "Cat-sound-meow", withExtension: "mp3") else {return}
+        do{
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        
+        } catch let error as NSError{print(error.localizedDescription)}
+    }
+    
+    func animateCatOnPress() {
+        /*
+        UIView.animate(withDuration: 0.15, delay: 0, options: .curveLinear) {
+            self.catImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9).translatedBy(x: 0, y: 5)
+            
+        } completion: { success in
+            UIView.animate(withDuration: 0.075, delay: 0, options: .curveLinear) {
+                self.catImageView.transform = CGAffineTransform.identity
+            } completion: { success in
+               
+            }
+        }
+*/
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .allowUserInteraction) {
+            self.catImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        } completion: { success in
+            UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction) {
+                self.catImageView.transform = CGAffineTransform.identity
+            } completion: { success in
+               
+            }
+        }
+
+    }
+    
+    @IBAction func settingsButtonDidTouch(_ sender: Any) {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
+           // self.settingsBarButtonItem.customView?.transform = CGAffineTransform(rotationAngle: .pi)
+            self.navigationItem.rightBarButtonItem?.customView?.transform = CGAffineTransform(rotationAngle: .pi)
+        } completion: { success in
+            
+        }
+
+    }
+    
+    
+    
     @objc func callcps() {
        // DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
        //     self.coins += self.cps
