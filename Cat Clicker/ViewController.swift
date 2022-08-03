@@ -28,7 +28,7 @@ protocol ViewControllerDelegate: AnyObject {
     func getAchievements() -> [Achievement]
     func getCps() -> Int
     func increaseTuna(amount: Int)
-    func refreshAdPoints(AdPoints: Int)
+    func increaseAdPoints(increment: Int)
     func getAdPoints() -> Int
 }
 
@@ -54,8 +54,8 @@ class ViewController: UIViewController, ViewControllerDelegate {
     func getAdPoints() -> Int {
         return adPoints
     }
-    func refreshAdPoints(AdPoints: Int) {
-       adPoints = AdPoints
+    func increaseAdPoints(increment: Int) {
+       adPoints += increment
     }
     func getSelectedCat() -> String {
         return selectedCat
@@ -218,19 +218,6 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     
     func animateCatOnPress() {
-        /*
-        UIView.animate(withDuration: 0.15, delay: 0, options: .curveLinear) {
-            self.catImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9).translatedBy(x: 0, y: 5)
-            
-        } completion: { success in
-            UIView.animate(withDuration: 0.075, delay: 0, options: .curveLinear) {
-                self.catImageView.transform = CGAffineTransform.identity
-            } completion: { success in
-               
-            }
-        }
-*/
-        
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .allowUserInteraction) {
             self.catImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         } completion: { success in

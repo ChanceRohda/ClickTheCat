@@ -17,12 +17,13 @@ struct Upgrade {
 
 class ShopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
+    @IBOutlet weak var orderByCostButton: UIButton!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return upgrades.count
+        return UpgradesManager.shared.upgrades.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let upgradeItem = upgrades[indexPath.row]
+        let upgradeItem = UpgradesManager.shared.upgrades[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "UpgradeTableViewCell", for: indexPath) as! UpgradeTableViewCell
         cell.upgradeImageView.image = upgradeItem.image
         cell.upgradeNameLabel.text = upgradeItem.name
@@ -32,18 +33,27 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let coins = viewControllerClass?.getCoins()
-        var purchasedUpgrade = upgrades[indexPath.row]
+        var purchasedUpgrade = UpgradesManager.shared.upgrades[indexPath.row]
         if coins! >= purchasedUpgrade.cost {
             viewControllerClass?.upgrade(coinDecrement: purchasedUpgrade.cost, cpcIncrement: 0)
             viewControllerClass?.increaseCps(amount: purchasedUpgrade.autocoin)
             var selectedCat = viewControllerClass?.getSelectedCat()
             if selectedCat == "Cat Food Cat" && purchasedUpgrade.name.contains("Food"){
+                let extraCpC = round(0.2 * Double(purchasedUpgrade.cost))
+                viewControllerClass?.increaseCps(amount: Int(extraCpC))
                 viewControllerClass?.increaseCps(amount: purchasedUpgrade.autocoin)
             }
             
         }
     }
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            
+            UpgradesManager.shared.upgrades.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
     @IBOutlet weak var coinLabel: UILabel!
     
     @IBOutlet weak var upgradeTableView: UITableView!
@@ -52,7 +62,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-    var upgrades: [Upgrade] = [Upgrade(cost: 10, autocoin: 1, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food 1")]
+    
     
     func refreshCoins(){
         if let coins = viewControllerClass?.getCoins(){
@@ -75,5 +85,17 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         viewControllerClass?.resetcoinsVC()
     }
     
+    @IBAction func orderByCostButtonDidTouch(_ sender: Any) {
+        switch UpgradesManager.shared.costOrder {
+        case .ascending:
+            UpgradesManager.shared.sortByCostDescending()
+            orderByCostButton.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
+        case .descending:
+            UpgradesManager.shared.sortByCostAscending()
+            orderByCostButton.setImage(UIImage(systemName: "arrow.down.circle.fill"), for: .normal)
+        }
+        upgradeTableView.reloadData()
+        
+    }
     
 }

@@ -18,6 +18,7 @@
 		1F4C006C287882CC00FB89D8 /* UpgradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */; };
 		1FD8F3E127E94CCB00D62D45 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */; };
 		1FDEFEB62896F03A002BBCE9 /* Cat-sound-meow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FDEFEB52896F03A002BBCE9 /* Cat-sound-meow.mp3 */; };
+		1FDEFEB8289AE4FD002BBCE9 /* Upgrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEB7289AE4FC002BBCE9 /* Upgrades.swift */; };
 		1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76427DD290E009C7770 /* AppDelegate.swift */; };
 		1FE5C76727DD290E009C7770 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76627DD290E009C7770 /* SceneDelegate.swift */; };
 		1FE5C76927DD290E009C7770 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76827DD290E009C7770 /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 		1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeTableViewCell.swift; sourceTree = "<group>"; };
 		1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		1FDEFEB52896F03A002BBCE9 /* Cat-sound-meow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cat-sound-meow.mp3"; sourceTree = "<group>"; };
+		1FDEFEB7289AE4FC002BBCE9 /* Upgrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upgrades.swift; sourceTree = "<group>"; };
 		1FE5C76127DD290E009C7770 /* Cat Clicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cat Clicker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE5C76427DD290E009C7770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FE5C76627DD290E009C7770 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +61,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F4C006D287882D800FB89D8 /* Table View Cells */ = {
+		1F4C006D287882D800FB89D8 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				1F07A5192831512F00DB4A93 /* CatTableViewCell.swift */,
@@ -67,7 +69,7 @@
 				1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */,
 				1F2349692885D71E009B3375 /* AchievementCollectionViewCell.swift */,
 			);
-			path = "Table View Cells";
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		1FE5C75827DD290D009C7770 = {
@@ -94,10 +96,11 @@
 				1FE5C76827DD290E009C7770 /* ViewController.swift */,
 				1F23496E288DAB0F009B3375 /* AdViewController.swift */,
 				1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */,
+				1FDEFEB7289AE4FC002BBCE9 /* Upgrades.swift */,
 				1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */,
 				1F07A517282C79F400DB4A93 /* catMenuViewController.swift */,
 				1F2349672885D32E009B3375 /* StatsAchievementsViewController.swift */,
-				1F4C006D287882D800FB89D8 /* Table View Cells */,
+				1F4C006D287882D800FB89D8 /* Cells */,
 				1FE5C76A27DD290E009C7770 /* Main.storyboard */,
 				1FE5C76D27DD290E009C7770 /* Assets.xcassets */,
 				1FE5C76F27DD290E009C7770 /* LaunchScreen.storyboard */,
@@ -193,6 +196,7 @@
 				1F07A5142810E2D800DB4A93 /* CrateShopViewController.swift in Sources */,
 				1FE5C76927DD290E009C7770 /* ViewController.swift in Sources */,
 				1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */,
+				1FDEFEB8289AE4FD002BBCE9 /* Upgrades.swift in Sources */,
 				1F4C006828678A9900FB89D8 /* CrateTableViewCell.swift in Sources */,
 				1F23496F288DAB0F009B3375 /* AdViewController.swift in Sources */,
 				1F07A518282C79F400DB4A93 /* catMenuViewController.swift in Sources */,

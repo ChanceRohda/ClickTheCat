@@ -14,8 +14,6 @@ class AdViewController: UIViewController {
     weak var viewControllerClass: ViewControllerDelegate?
     @IBOutlet weak var rewardImageView: UIImageView!
     @IBOutlet weak var rewardLabel: UILabel!
-    
-    
     var possiblePrizes: [Prize] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +44,7 @@ class AdViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    var adPoints: Int = 0
+    
     private var rewardedAd: GADRewardedAd?
     
     func loadRewardedAd() {
@@ -69,10 +67,9 @@ class AdViewController: UIViewController {
         ad.present(fromRootViewController: self) {
           let reward = ad.adReward
           print("Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
-            self.adPoints += 1
-            self.viewControllerClass?.refreshAdPoints(AdPoints: self.adPoints)
+            self.viewControllerClass?.increaseAdPoints(increment: 1)
             self.getReward()
-            print("Current Ad Points: \(self.adPoints)")
+            
             
         }
       } else {
@@ -114,12 +111,25 @@ class AdViewController: UIViewController {
                 rewardImageView.image = UIImage(named: "Tuna")!
                 viewControllerClass?.increaseTuna(amount: prize!.amount)
             } else if prize?.type == "Autocoin" {
+                if prize!.amount < 1 {
+                    rewardImageView.image = UIImage(named: "Gold Cat")!
+                    viewControllerClass?.increaseCps(amount: 1)
+                    if viewControllerClass?.getSelectedCat() == "Ad Cat"{
+                        viewControllerClass?.increaseCps(amount: 1)
+                    }
+                    if viewControllerClass?.getSelectedCat() == "Ad Cat"{
+                        rewardLabel.text = "You got \(2) autocoin!"
+                    } else {
+                        rewardLabel.text = "You got \(1) autocoin!"
+                    }
+                } else {
                 viewControllerClass?.increaseCps(amount: prize!.amount)
                 if viewControllerClass?.getSelectedCat() == "Ad Cat" {
                     
                 }
                 rewardLabel.text = "You got \(prize!.amount) autocoin!"
                 rewardImageView.image = UIImage(named: "Gold Cat")!
+                }
             } else if prize?.type == "CpC" {
                 viewControllerClass?.upgrade(coinDecrement: 0, cpcIncrement: prize!.amount)
                 if viewControllerClass?.getSelectedCat() == "Ad Cat" {
@@ -128,7 +138,7 @@ class AdViewController: UIViewController {
                 rewardLabel.text = "You got \(prize!.amount) CpC!"
                 rewardImageView.image = UIImage(named: "CpC+")!
             }
-        if adPoints == 50 {
+        if viewControllerClass?.getAdPoints() == 50 {
             rewardLabel.text = "Ad Cat Earned"
         }
         
