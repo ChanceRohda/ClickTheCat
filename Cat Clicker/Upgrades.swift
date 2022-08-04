@@ -16,9 +16,9 @@ enum CostOrder {
 class UpgradesManager {
     static let shared = UpgradesManager()
     var costOrder: CostOrder = .ascending
-    
+    var biggestUpgrade: Int = 10
     private init() {}
-    var upgrades: [Upgrade] = [Upgrade(cost: 10, autocoin: 1, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food 1"), Upgrade(cost: 100, autocoin: 10, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food 2")]
+    var upgrades: [Upgrade] = [Upgrade(cost: 10, autocoin: 1, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food 1")]
     func sortByCostAscending() {
         costOrder = .ascending
         upgrades.sort { upgrades1, upgrades2 in

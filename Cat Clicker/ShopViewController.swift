@@ -35,6 +35,10 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         let coins = viewControllerClass?.getCoins()
         var purchasedUpgrade = UpgradesManager.shared.upgrades[indexPath.row]
         if coins! >= purchasedUpgrade.cost {
+            if purchasedUpgrade.cost == UpgradesManager.shared.biggestUpgrade {
+                createUpgrade()
+            }
+            
             viewControllerClass?.upgrade(coinDecrement: purchasedUpgrade.cost, cpcIncrement: 0)
             viewControllerClass?.increaseCps(amount: purchasedUpgrade.autocoin)
             var selectedCat = viewControllerClass?.getSelectedCat()
@@ -78,7 +82,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshCoins()
         upgradeTableView.dataSource = self
         upgradeTableView.delegate = self
-        //explodeButton.tintColor = UIColor.white
+        
         }
         // Do any additional setup after loading the view.
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,6 +100,12 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         upgradeTableView.reloadData()
         
+    }
+    func createUpgrade() {
+        let biggestUpgrade = UpgradesManager.shared.biggestUpgrade
+        UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 10, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)"))
+        UpgradesManager.shared.biggestUpgrade *= 10
+        upgradeTableView.reloadData()
     }
     
 }
