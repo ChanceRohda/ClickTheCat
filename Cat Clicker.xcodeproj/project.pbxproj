@@ -18,7 +18,26 @@
 		1F4C006C287882CC00FB89D8 /* UpgradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */; };
 		1FD8F3E127E94CCB00D62D45 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */; };
 		1FDEFEB62896F03A002BBCE9 /* Cat-sound-meow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FDEFEB52896F03A002BBCE9 /* Cat-sound-meow.mp3 */; };
-		1FDEFEB8289AE4FD002BBCE9 /* Upgrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEB7289AE4FC002BBCE9 /* Upgrades.swift */; };
+		1FDEFEB8289AE4FD002BBCE9 /* UpgradesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEB7289AE4FC002BBCE9 /* UpgradesManager.swift */; };
+		1FDEFEBC289D5652002BBCE9 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FDEFEBB289D5652002BBCE9 /* Auth.storyboard */; };
+		1FDEFEBE289EFA24002BBCE9 /* AuthRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEBD289EFA24002BBCE9 /* AuthRootViewController.swift */; };
+		1FDEFEC0289EFA32002BBCE9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEBF289EFA32002BBCE9 /* LoginViewController.swift */; };
+		1FDEFEC2289EFA4E002BBCE9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEC1289EFA4E002BBCE9 /* SignUpViewController.swift */; };
+		1FDEFEC428A00AF8002BBCE9 /* dog.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FDEFEC328A00AF7002BBCE9 /* dog.mp3 */; };
+		1FDEFEC828A028B9002BBCE9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEFEC728A028B9002BBCE9 /* FirebaseAnalytics */; };
+		1FDEFECA28A028B9002BBCE9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEFEC928A028B9002BBCE9 /* FirebaseAuth */; };
+		1FDEFECC28A028B9002BBCE9 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEFECB28A028B9002BBCE9 /* FirebaseCrashlytics */; };
+		1FDEFECE28A028B9002BBCE9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEFECD28A028B9002BBCE9 /* FirebaseDatabase */; };
+		1FDEFED028A028B9002BBCE9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEFECF28A028B9002BBCE9 /* FirebaseFirestore */; };
+		1FDEFED228A028B9002BBCE9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEFED128A028B9002BBCE9 /* FirebaseStorage */; };
+		1FDEFED428A02975002BBCE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FDEFED328A02964002BBCE9 /* GoogleService-Info.plist */; };
+		1FDEFED628A02B8D002BBCE9 /* RootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFED528A02B8B002BBCE9 /* RootManager.swift */; };
+		1FDEFED928A033B5002BBCE9 /* CoinsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFED828A033B5002BBCE9 /* CoinsModel.swift */; };
+		1FDEFEDB28A03415002BBCE9 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEDA28A03414002BBCE9 /* UserModel.swift */; };
+		1FDEFEDD28A2DE77002BBCE9 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEDC28A2DE76002BBCE9 /* LeaderboardTableViewCell.swift */; };
+		1FDEFEDF28A2E0C3002BBCE9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEDE28A2E0C3002BBCE9 /* ProfileViewController.swift */; };
+		1FDEFEE128A5AA57002BBCE9 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEE028A5AA55002BBCE9 /* LeaderboardViewController.swift */; };
+		1FDEFEE328AC7604002BBCE9 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEE228AC7603002BBCE9 /* TutorialViewController.swift */; };
 		1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76427DD290E009C7770 /* AppDelegate.swift */; };
 		1FE5C76727DD290E009C7770 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76627DD290E009C7770 /* SceneDelegate.swift */; };
 		1FE5C76927DD290E009C7770 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76827DD290E009C7770 /* ViewController.swift */; };
@@ -38,7 +57,20 @@
 		1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeTableViewCell.swift; sourceTree = "<group>"; };
 		1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		1FDEFEB52896F03A002BBCE9 /* Cat-sound-meow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cat-sound-meow.mp3"; sourceTree = "<group>"; };
-		1FDEFEB7289AE4FC002BBCE9 /* Upgrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upgrades.swift; sourceTree = "<group>"; };
+		1FDEFEB7289AE4FC002BBCE9 /* UpgradesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradesManager.swift; sourceTree = "<group>"; };
+		1FDEFEBB289D5652002BBCE9 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		1FDEFEBD289EFA24002BBCE9 /* AuthRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRootViewController.swift; sourceTree = "<group>"; };
+		1FDEFEBF289EFA32002BBCE9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1FDEFEC1289EFA4E002BBCE9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		1FDEFEC328A00AF7002BBCE9 /* dog.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dog.mp3; sourceTree = "<group>"; };
+		1FDEFED328A02964002BBCE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1FDEFED528A02B8B002BBCE9 /* RootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootManager.swift; sourceTree = "<group>"; };
+		1FDEFED828A033B5002BBCE9 /* CoinsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsModel.swift; sourceTree = "<group>"; };
+		1FDEFEDA28A03414002BBCE9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		1FDEFEDC28A2DE76002BBCE9 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
+		1FDEFEDE28A2E0C3002BBCE9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		1FDEFEE028A5AA55002BBCE9 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		1FDEFEE228AC7603002BBCE9 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		1FE5C76127DD290E009C7770 /* Cat Clicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cat Clicker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE5C76427DD290E009C7770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FE5C76627DD290E009C7770 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +86,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FDEFECE28A028B9002BBCE9 /* FirebaseDatabase in Frameworks */,
+				1FDEFEC828A028B9002BBCE9 /* FirebaseAnalytics in Frameworks */,
+				1FDEFECC28A028B9002BBCE9 /* FirebaseCrashlytics in Frameworks */,
+				1FDEFECA28A028B9002BBCE9 /* FirebaseAuth in Frameworks */,
+				1FDEFED228A028B9002BBCE9 /* FirebaseStorage in Frameworks */,
 				1F23496D288DA90F009B3375 /* GoogleMobileAds in Frameworks */,
+				1FDEFED028A028B9002BBCE9 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,12 +102,22 @@
 		1F4C006D287882D800FB89D8 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1FDEFEDC28A2DE76002BBCE9 /* LeaderboardTableViewCell.swift */,
 				1F07A5192831512F00DB4A93 /* CatTableViewCell.swift */,
 				1F4C006728678A9900FB89D8 /* CrateTableViewCell.swift */,
 				1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */,
 				1F2349692885D71E009B3375 /* AchievementCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		1FDEFED728A03392002BBCE9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1FDEFED828A033B5002BBCE9 /* CoinsModel.swift */,
+				1FDEFEDA28A03414002BBCE9 /* UserModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1FE5C75827DD290D009C7770 = {
@@ -93,19 +141,30 @@
 			children = (
 				1FE5C76427DD290E009C7770 /* AppDelegate.swift */,
 				1FE5C76627DD290E009C7770 /* SceneDelegate.swift */,
+				1FDEFED528A02B8B002BBCE9 /* RootManager.swift */,
+				1FE5C76A27DD290E009C7770 /* Main.storyboard */,
+				1FDEFEE028A5AA55002BBCE9 /* LeaderboardViewController.swift */,
+				1FDEFEDE28A2E0C3002BBCE9 /* ProfileViewController.swift */,
 				1FE5C76827DD290E009C7770 /* ViewController.swift */,
 				1F23496E288DAB0F009B3375 /* AdViewController.swift */,
 				1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */,
-				1FDEFEB7289AE4FC002BBCE9 /* Upgrades.swift */,
+				1FDEFEB7289AE4FC002BBCE9 /* UpgradesManager.swift */,
 				1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */,
 				1F07A517282C79F400DB4A93 /* catMenuViewController.swift */,
 				1F2349672885D32E009B3375 /* StatsAchievementsViewController.swift */,
+				1FDEFED728A03392002BBCE9 /* Models */,
 				1F4C006D287882D800FB89D8 /* Cells */,
-				1FE5C76A27DD290E009C7770 /* Main.storyboard */,
+				1FDEFEBB289D5652002BBCE9 /* Auth.storyboard */,
+				1FDEFEE228AC7603002BBCE9 /* TutorialViewController.swift */,
+				1FDEFEBD289EFA24002BBCE9 /* AuthRootViewController.swift */,
+				1FDEFEBF289EFA32002BBCE9 /* LoginViewController.swift */,
+				1FDEFEC1289EFA4E002BBCE9 /* SignUpViewController.swift */,
 				1FE5C76D27DD290E009C7770 /* Assets.xcassets */,
 				1FE5C76F27DD290E009C7770 /* LaunchScreen.storyboard */,
 				1FE5C77227DD290E009C7770 /* Info.plist */,
 				1FDEFEB52896F03A002BBCE9 /* Cat-sound-meow.mp3 */,
+				1FDEFEC328A00AF7002BBCE9 /* dog.mp3 */,
+				1FDEFED328A02964002BBCE9 /* GoogleService-Info.plist */,
 			);
 			path = "Cat Clicker";
 			sourceTree = "<group>";
@@ -128,6 +187,12 @@
 			name = "Cat Clicker";
 			packageProductDependencies = (
 				1F23496C288DA90F009B3375 /* GoogleMobileAds */,
+				1FDEFEC728A028B9002BBCE9 /* FirebaseAnalytics */,
+				1FDEFEC928A028B9002BBCE9 /* FirebaseAuth */,
+				1FDEFECB28A028B9002BBCE9 /* FirebaseCrashlytics */,
+				1FDEFECD28A028B9002BBCE9 /* FirebaseDatabase */,
+				1FDEFECF28A028B9002BBCE9 /* FirebaseFirestore */,
+				1FDEFED128A028B9002BBCE9 /* FirebaseStorage */,
 			);
 			productName = "Cat Clicker";
 			productReference = 1FE5C76127DD290E009C7770 /* Cat Clicker.app */;
@@ -159,6 +224,7 @@
 			mainGroup = 1FE5C75827DD290D009C7770;
 			packageReferences = (
 				1F23496B288DA90E009B3375 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 1FE5C76227DD290E009C7770 /* Products */;
 			projectDirPath = "";
@@ -176,8 +242,11 @@
 			files = (
 				1FE5C77127DD290E009C7770 /* LaunchScreen.storyboard in Resources */,
 				1FE5C76E27DD290E009C7770 /* Assets.xcassets in Resources */,
+				1FDEFEC428A00AF8002BBCE9 /* dog.mp3 in Resources */,
+				1FDEFEBC289D5652002BBCE9 /* Auth.storyboard in Resources */,
 				1FE5C76C27DD290E009C7770 /* Main.storyboard in Resources */,
 				1FDEFEB62896F03A002BBCE9 /* Cat-sound-meow.mp3 in Resources */,
+				1FDEFED428A02975002BBCE9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,16 +258,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F2349682885D32E009B3375 /* StatsAchievementsViewController.swift in Sources */,
+				1FDEFEDD28A2DE77002BBCE9 /* LeaderboardTableViewCell.swift in Sources */,
 				1F23496A2885D71E009B3375 /* AchievementCollectionViewCell.swift in Sources */,
+				1FDEFED928A033B5002BBCE9 /* CoinsModel.swift in Sources */,
+				1FDEFEBE289EFA24002BBCE9 /* AuthRootViewController.swift in Sources */,
+				1FDEFEC0289EFA32002BBCE9 /* LoginViewController.swift in Sources */,
 				1F07A51A2831512F00DB4A93 /* CatTableViewCell.swift in Sources */,
 				1F4C006C287882CC00FB89D8 /* UpgradeTableViewCell.swift in Sources */,
+				1FDEFEE128A5AA57002BBCE9 /* LeaderboardViewController.swift in Sources */,
 				1FD8F3E127E94CCB00D62D45 /* ShopViewController.swift in Sources */,
 				1F07A5142810E2D800DB4A93 /* CrateShopViewController.swift in Sources */,
+				1FDEFEE328AC7604002BBCE9 /* TutorialViewController.swift in Sources */,
 				1FE5C76927DD290E009C7770 /* ViewController.swift in Sources */,
 				1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */,
-				1FDEFEB8289AE4FD002BBCE9 /* Upgrades.swift in Sources */,
+				1FDEFEC2289EFA4E002BBCE9 /* SignUpViewController.swift in Sources */,
+				1FDEFED628A02B8D002BBCE9 /* RootManager.swift in Sources */,
+				1FDEFEB8289AE4FD002BBCE9 /* UpgradesManager.swift in Sources */,
 				1F4C006828678A9900FB89D8 /* CrateTableViewCell.swift in Sources */,
+				1FDEFEDB28A03415002BBCE9 /* UserModel.swift in Sources */,
 				1F23496F288DAB0F009B3375 /* AdViewController.swift in Sources */,
+				1FDEFEDF28A2E0C3002BBCE9 /* ProfileViewController.swift in Sources */,
 				1F07A518282C79F400DB4A93 /* catMenuViewController.swift in Sources */,
 				1FE5C76727DD290E009C7770 /* SceneDelegate.swift in Sources */,
 			);
@@ -438,6 +517,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -445,6 +532,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1F23496B288DA90E009B3375 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		1FDEFEC728A028B9002BBCE9 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		1FDEFEC928A028B9002BBCE9 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		1FDEFECB28A028B9002BBCE9 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		1FDEFECD28A028B9002BBCE9 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		1FDEFECF28A028B9002BBCE9 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		1FDEFED128A028B9002BBCE9 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

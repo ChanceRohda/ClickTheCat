@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Firebase
 struct Achievement {
     var completedImage: UIImage
     var description: String
@@ -30,6 +31,8 @@ protocol ViewControllerDelegate: AnyObject {
     func increaseTuna(amount: Int)
     func increaseAdPoints(increment: Int)
     func getAdPoints() -> Int
+    func getTuna() -> Int
+    func increasePhalanxCount()
 }
 
 
@@ -45,10 +48,11 @@ class ViewController: UIViewController, ViewControllerDelegate {
     var player: AVAudioPlayer?
     var achievements: [Achievement] = [Achievement(completedImage: UIImage(named: "Alien Cat")!, description: "Click 1000 Times", isComplete: false), Achievement(completedImage: UIImage(named: "Time Cat")!, description: "Click 1 Million Times", isComplete: false), Achievement(completedImage: UIImage(named: "Ad Cat")!, description: "Watch 50 Ads", isComplete: false)]
     var adPoints = 0
+    var phalanx = 0
+    
     
     @IBOutlet weak var coinLabel: UILabel!
     @IBOutlet weak var dogRewardLabel: UILabel!
-    @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var catImageView: UIImageView!
     
     func getAdPoints() -> Int {
@@ -75,6 +79,14 @@ class ViewController: UIViewController, ViewControllerDelegate {
         }
         
     }
+    func increasePhalanxCount() {
+        phalanx += 1
+    }
+    func getTuna() -> Int {
+        return tuna
+    }
+    
+    
     func increaseTuna(amount: Int) {
         tuna += amount
     }
@@ -96,10 +108,17 @@ class ViewController: UIViewController, ViewControllerDelegate {
     func upgrade(coinDecrement: Int, cpcIncrement: Int) {
         coins -= coinDecrement
         cpc += cpcIncrement
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["coins" : coins, "cpc" : cpc]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
     }
     func incrementCoins(increment: Int) {
         coins += increment
         coinLabel.text = "Coins: \(coins)"
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["coins" : coins
+           ]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
     }
     func increaseCps(amount: Int) {
         cps += amount
@@ -122,6 +141,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
         if let destinationVC = segue.destination as? StatsAchievementsViewController {
             destinationVC.viewControllerClass = self
         }
+        if let destinationVC = segue.destination as? LeaderboardViewController {
+            destinationVC.viewControllerClass = self
+        }
         if let destinationVC = segue.destination as? catMenuViewController {
             destinationVC.acquiredCats = acquiredCats
             
@@ -134,14 +156,30 @@ class ViewController: UIViewController, ViewControllerDelegate {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        //callcps()
-        Timer.scheduledTimer(timeInterval: timerIncrement, target: self, selector: #selector(callcps), userInfo: nil, repeats: true)
+        callcps()
+        if coins == 0 {
+            dogRewardLabel.text = "Tap the Cat!"
+        }
         let tap = UITapGestureRecognizer(target: self, action: #selector(catDidClick(_:)))
         catImageView.addGestureRecognizer(tap)
         catImageView.isUserInteractionEnabled = true
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        UserModel.collection.child(userID).observeSingleEvent(of: .value) { snapshot in
+            guard let data = snapshot.value as? [String: Any] else {return}
+            guard let coins = data["coins"] as? Int else {return}
+            self.coinLabel.text = "Coins: \(coins)"
+            self.coins = coins
+            Timer.scheduledTimer(timeInterval: self.timerIncrement, target: self, selector: #selector(self.callcps), userInfo: nil, repeats: true)
+        }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
-        dogRewardLabel.text = ""
+        if coins > 0 {
+            dogRewardLabel.text = ""
+        }
+            
+        
+        
         catImageView.image = UIImage(named: selectedCat)
         if adPoints >= 50 && !acquiredCats.contains(where: { cat in
             return cat.name == "Ad Cat"
@@ -210,11 +248,21 @@ class ViewController: UIViewController, ViewControllerDelegate {
     
     func playSound() {
         guard let url = Bundle.main.url(forResource: "Cat-sound-meow", withExtension: "mp3") else {return}
-        do{
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
+        guard let url2 = Bundle.main.url(forResource: "dog", withExtension: "mp3") else {return}
+        if selectedCat != "Dog" {
+            do{
+                player = try AVAudioPlayer(contentsOf: url)
+                player?.play()
+            
+            } catch let error as NSError{print(error.localizedDescription)}
+        } else {
+            do{
+                player = try AVAudioPlayer(contentsOf: url2)
+                player?.play()
+            
+            } catch let error as NSError{print(error.localizedDescription)}
+        }
         
-        } catch let error as NSError{print(error.localizedDescription)}
     }
     
     func animateCatOnPress() {
@@ -230,18 +278,10 @@ class ViewController: UIViewController, ViewControllerDelegate {
 
     }
     
-    @IBAction func settingsButtonDidTouch(_ sender: Any) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
-           // self.settingsBarButtonItem.customView?.transform = CGAffineTransform(rotationAngle: .pi)
-            self.navigationItem.rightBarButtonItem?.customView?.transform = CGAffineTransform(rotationAngle: .pi)
-        } completion: { success in
-            
-        }
-
+    
+    @IBAction func logOutButtonDidTouch(_ sender: Any) {
+        RootManager.logout()
     }
-    
-    
-    
     @objc func callcps() {
        // DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
        //     self.coins += self.cps
@@ -252,6 +292,10 @@ class ViewController: UIViewController, ViewControllerDelegate {
         if selectedCat == "Gray" {
             let grayCps: Double = (Double(cps) * 0.05)
             incrementCoins(increment: Int(round((grayCps))))
+        }
+        if selectedCat == "Phalanx Cat" {
+            let PhalanxCps: Double = (Double(cps) * 0.25 * Double(phalanx))
+            incrementCoins(increment: Int(round((PhalanxCps))))
         }
         if selectedCat == "Time Cat" {
             self.coins += cps
@@ -277,6 +321,16 @@ class ViewController: UIViewController, ViewControllerDelegate {
     @IBAction func adButtonDidTouch(_ sender: Any) {
         performSegue(withIdentifier: "adSegue", sender: nil)
     }
+    
+    @IBAction func leaderboardButtonDidTouch(_ sender: Any) {
+        performSegue(withIdentifier: "leaderboardSegue", sender: nil)
+    }
+    
+    @IBAction func profileButtonDidTouch(_ sender: Any) {
+        performSegue(withIdentifier: "profileSegue", sender: nil)
+    }
+    
+    
     
     
 }

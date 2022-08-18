@@ -50,14 +50,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-            
-            UpgradesManager.shared.upgrades.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-    }
+   
     @IBOutlet weak var coinLabel: UILabel!
     
     @IBOutlet weak var upgradeTableView: UITableView!
@@ -82,7 +75,9 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshCoins()
         upgradeTableView.dataSource = self
         upgradeTableView.delegate = self
-        
+        for i in 1...30 {
+            createUpgrade()
+        }
         }
         // Do any additional setup after loading the view.
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,10 +97,13 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     func createUpgrade() {
+        if UpgradesManager.shared.upgrades.count < 17 {
         let biggestUpgrade = UpgradesManager.shared.biggestUpgrade
-        UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 10, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)"))
+        
+         UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 10, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)"))
+       
         UpgradesManager.shared.biggestUpgrade *= 10
         upgradeTableView.reloadData()
     }
-    
+    }
 }

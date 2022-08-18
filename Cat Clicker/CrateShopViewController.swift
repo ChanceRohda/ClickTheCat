@@ -10,16 +10,18 @@ import UIKit
 struct Crate {
     var name: String
     var cost: Int
+    var tunacost: Int?
     var displayCost: String
     var image: UIImage
     var contents: [String]
     var cpcReward: Int?
     var cpsReward: Int?
     var catReward: Cat
-    var coinReward: Int
+    var coinReward: Int?
     var tunaReward: Int?
     var negativeCoin: Int?
     var negativeCpc: Int?
+    
 }
 
 // Keywords: cpc, tuna, cps, coins, negCoins, negCpC
@@ -30,15 +32,16 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var crateShopTitleLabel: UILabel!
     @IBOutlet weak var rewardLabel: UILabel!
     @IBOutlet weak var coinLabel: UILabel!
+    @IBOutlet weak var tunaLabel: UILabel!
     weak var viewControllerClass: ViewControllerDelegate?
     
-    var crates: [Crate] = [Crate(name: "Basic Crate", cost: 1000, displayCost: "1000 Coins", image: UIImage(named: "Gray")!, contents: ["coins", "cat", "cps", "tuna", "negCoins", "coins", "cpc"], cpcReward: 1, cpsReward: 130, catReward: Cat(name: "Gray", description: "+5% Autocoin", image: UIImage(named: "Gray")!), coinReward: 1500, tunaReward: 1, negativeCoin: 500), Crate(name: "Cool Crate", cost: 50000, displayCost: "50000 Coins", image: UIImage(named: "Cool")!, contents:  ["cps", "cat", "cpc", "tuna", "negCoins", "coins", "cpc"], cpcReward: 20, cpsReward: 7700, catReward: Cat(name: "Cool", description: "More Autocoin in Crates", image: UIImage(named: "Cool")!), coinReward: 60000, tunaReward: 1, negativeCoin: 1000), Crate(name: "Dog Box", cost: 1000000, displayCost: "1 Million Coins", image: UIImage(named: "Dog")!, contents: ["cpc", "cat", "cps", "tuna", "negCpc", "cps", "cpc"], cpcReward: 200, cpsReward: 10000, catReward: Cat(name: "Dog", description: "Might dig up treasure!", image: UIImage(named: "Dog")!), coinReward: 1100000, tunaReward: 5, negativeCoin: 0, negativeCpc: 800)]
-    
+    var crates: [Crate] = [Crate(name: "Basic Crate", cost: 1000, tunacost: 0, displayCost: "1000 Coins", image: UIImage(named: "Gray")!, contents: ["coins", "cat", "cps", "tuna", "negCoins", "coins", "cpc"], cpcReward: 1, cpsReward: 130, catReward: Cat(name: "Gray", description: "+5% Autocoin", image: UIImage(named: "Gray")!), coinReward: 1500, tunaReward: 1, negativeCoin: 500), Crate(name: "Cool Crate", cost: 50000, tunacost: 0, displayCost: "50000 Coins", image: UIImage(named: "Cool")!, contents:  ["cps", "cat", "cpc", "tuna", "negCoins", "coins", "cpc"], cpcReward: 20, cpsReward: 7700, catReward: Cat(name: "Cool", description: "More Autocoin in Crates", image: UIImage(named: "Cool")!), coinReward: 60000, tunaReward: 1, negativeCoin: 1000), Crate(name: "Dog Box", cost: 1000000, tunacost: 0, displayCost: "1 Million Coins", image: UIImage(named: "Dog")!, contents: ["cpc", "cat", "cps", "tuna", "negCpc", "cps", "cpc"], cpcReward: 200, cpsReward: 10000, catReward: Cat(name: "Dog", description: "Might dig up treasure!", image: UIImage(named: "Dog")!), coinReward: 1100000, tunaReward: 5, negativeCoin: 0, negativeCpc: 800), Crate(name: "Roman Crate", cost: 0, tunacost: 50, displayCost: "50 Tuna", image: UIImage(named: "Phalanx Cat")!, contents: ["phalanx", "cpc"], cpcReward: 500, catReward: Cat(name: "Phalanx Cat", description: "More Autocoin the more you collect!", image: UIImage(named: "Phalanx Cat")!))]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshCoins()
+        tunaLabel.text = "Tuna: \(viewControllerClass!.getTuna())"
         rewardLabel.text = "Buy a Crate!"
         crateShopTitleLabel.text = "Crate Shop"
         cratesTableView.dataSource = self
@@ -63,10 +66,13 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let purchasedCrate = crates[indexPath.row]
         if let catList = viewControllerClass?.getCatList(){
+            if let tuna = viewControllerClass?.getTuna() {
             if let coins: Int = viewControllerClass?.getCoins() {
-                if coins >= purchasedCrate.cost {
+                if coins >= purchasedCrate.cost && tuna >= purchasedCrate.tunacost! {
                     let crateContent = purchasedCrate.contents.randomElement()
                     viewControllerClass?.upgrade(coinDecrement: purchasedCrate.cost, cpcIncrement: 0)
+                    viewControllerClass?.increaseTuna(amount: purchasedCrate.tunacost! * -1)
+                    tunaLabel.text = "Tuna: \(viewControllerClass!.getTuna())"
                     if crateContent == "cpc" {
                         viewControllerClass?.upgrade(coinDecrement: 0, cpcIncrement: purchasedCrate.cpcReward!)
                         let selectedCat = viewControllerClass?.getSelectedCat()
@@ -89,8 +95,8 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
                         viewControllerClass?.addCat(cat: purchasedCrate.catReward)
                         rewardLabel.text = "\(purchasedCrate.catReward.name) Cat Acquired!"
                     } else if crateContent == "coins" {
-                        viewControllerClass?.upgrade(coinDecrement: purchasedCrate.coinReward * -1, cpcIncrement: 0)
-                        rewardLabel.text = "\(purchasedCrate.coinReward) Coins Acquired!"
+                        viewControllerClass?.upgrade(coinDecrement: purchasedCrate.coinReward! * -1, cpcIncrement: 0)
+                        rewardLabel.text = "\(purchasedCrate.coinReward!) Coins Acquired!"
                     } else if crateContent == "tuna" {
                         rewardLabel.text = "\(purchasedCrate.tunaReward!) Tuna Acquired!"
                         viewControllerClass?.increaseTuna(amount: purchasedCrate.tunaReward!)
@@ -102,12 +108,18 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
                         viewControllerClass?.upgrade(coinDecrement: 0, cpcIncrement: (purchasedCrate.negativeCpc!) * -1)
                         rewardLabel.text = "\(purchasedCrate.negativeCpc!) Cpc Lost."
                         viewControllerClass?.zeroCpC()
+                        
+                    } else if crateContent == "phalanx"{
+                        viewControllerClass?.addCat(cat: purchasedCrate.catReward)
+                        rewardLabel.text = "Phalanx Cat Acquired!"
+                        viewControllerClass?.increasePhalanxCount()
                     } else {
-                        viewControllerClass?.upgrade(coinDecrement: purchasedCrate.coinReward * -1, cpcIncrement: 0)
-                        rewardLabel.text = "\(purchasedCrate.coinReward) Coins Acquired!"
+                        viewControllerClass?.upgrade(coinDecrement: purchasedCrate.coinReward! * -1, cpcIncrement: 0)
+                        rewardLabel.text = "\(purchasedCrate.coinReward!) Coins Acquired!"
                     }
                 }
             }
+        }
         }
     }
     
@@ -127,4 +139,5 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
              }
         }
     }
+    
 }
