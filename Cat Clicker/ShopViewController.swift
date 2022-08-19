@@ -12,6 +12,8 @@ struct Upgrade {
     var autocoin: Int
     var image: UIImage
     var name: String
+    var displayCost: String
+    var displayAutocoin: String
 }
 
 
@@ -27,27 +29,30 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "UpgradeTableViewCell", for: indexPath) as! UpgradeTableViewCell
         cell.upgradeImageView.image = upgradeItem.image
         cell.upgradeNameLabel.text = upgradeItem.name
-        cell.upgradeCostLabel.text = "Cost: \(upgradeItem.cost)"
-        cell.upgradeAutocoinLabel.text = "\(upgradeItem.autocoin) Autocoin"
+        cell.upgradeCostLabel.text = "Cost: \(upgradeItem.displayCost)"
+        cell.upgradeAutocoinLabel.text = "\(upgradeItem.displayAutocoin) Autocoin"
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let coins = viewControllerClass?.getCoins()
         var purchasedUpgrade = UpgradesManager.shared.upgrades[indexPath.row]
         if coins! >= purchasedUpgrade.cost {
-            if purchasedUpgrade.cost == UpgradesManager.shared.biggestUpgrade {
-                createUpgrade()
-            }
+            if purchasedUpgrade.name != "Gazillionaire Cat" {
+                if purchasedUpgrade.cost == UpgradesManager.shared.biggestUpgrade {
+                    createUpgrade()
+                }
             
-            viewControllerClass?.upgrade(coinDecrement: purchasedUpgrade.cost, cpcIncrement: 0)
-            viewControllerClass?.increaseCps(amount: purchasedUpgrade.autocoin)
-            var selectedCat = viewControllerClass?.getSelectedCat()
-            if selectedCat == "Cat Food Cat" && purchasedUpgrade.name.contains("Food"){
-                let extraCpC = round(0.2 * Double(purchasedUpgrade.cost))
-                viewControllerClass?.increaseCps(amount: Int(extraCpC))
+                viewControllerClass?.upgrade(coinDecrement: purchasedUpgrade.cost, cpcIncrement: 0)
                 viewControllerClass?.increaseCps(amount: purchasedUpgrade.autocoin)
+                var selectedCat = viewControllerClass?.getSelectedCat()
+                if selectedCat == "Cat Food Cat" && purchasedUpgrade.name.contains("Food"){
+                    let extraCpC = round(0.2 * Double(purchasedUpgrade.cost))
+                    viewControllerClass?.increaseCps(amount: Int(extraCpC))
+                    viewControllerClass?.increaseCps(amount: purchasedUpgrade.autocoin)
+                }
+            } else {
+                
             }
-            
         }
     }
    
@@ -55,15 +60,11 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var upgradeTableView: UITableView!
     weak var viewControllerClass: ViewControllerDelegate?
-    
-    
-    
-    
-    
-    
+
     func refreshCoins(){
         if let coins = viewControllerClass?.getCoins(){
-        coinLabel.text = "Coins: \(coins)"
+            let displayCoins = viewControllerClass?.roundAndAbbreviate(num: Double(coins))
+            coinLabel.text = "Coins: \(displayCoins ?? "error")"
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                  self.refreshCoins()
              }
@@ -75,7 +76,10 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshCoins()
         upgradeTableView.dataSource = self
         upgradeTableView.delegate = self
-        for i in 1...30 {
+        //for i in 1...30 {
+        //    createUpgrade()
+        //}
+        if UpgradesManager.shared.upgrades.count == 0 {
             createUpgrade()
         }
         }
@@ -97,11 +101,11 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     func createUpgrade() {
-        if UpgradesManager.shared.upgrades.count < 17 {
-        let biggestUpgrade = UpgradesManager.shared.biggestUpgrade
-        
-         UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 10, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)"))
-       
+        if UpgradesManager.shared.upgrades.count < 10 {
+            let biggestUpgrade = UpgradesManager.shared.biggestUpgrade
+            let displayCost = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade * 10)))
+            let displayAutocoin = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade)))
+            UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 10, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)", displayCost: displayCost, displayAutocoin: displayAutocoin))
         UpgradesManager.shared.biggestUpgrade *= 10
         upgradeTableView.reloadData()
     }

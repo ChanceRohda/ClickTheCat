@@ -99,9 +99,11 @@ class AdViewController: UIViewController {
                     viewControllerClass?.upgrade(coinDecrement: prize!.amount * -1, cpcIncrement: 0)
                 }
                     if viewControllerClass?.getSelectedCat() == "Ad Cat" || viewControllerClass?.getSelectedCat() == "Gold Cat"{
-                        rewardLabel.text = "You got \(prize!.amount * 2) coins!"
+                        let display1 = viewControllerClass?.roundAndAbbreviate(num: Double(prize!.amount * 2))
+                        rewardLabel.text = "You got \(display1 ?? "error") coins!"
                     } else {
-                        rewardLabel.text = "You got \(prize!.amount) coins!"
+                        let display2 = viewControllerClass?.roundAndAbbreviate(num: Double(prize!.amount))
+                        rewardLabel.text = "You got \(display2 ?? "error") coins!"
                     }
                 
                 }

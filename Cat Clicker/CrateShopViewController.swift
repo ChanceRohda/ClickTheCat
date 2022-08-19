@@ -133,7 +133,8 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func refreshCoins(){
         if let coins = viewControllerClass?.getCoins(){
-            coinLabel.text = "Coins: \(coins)"
+            let displayCoins = viewControllerClass?.roundAndAbbreviate(num: Double(coins))
+            coinLabel.text = "Coins: \(displayCoins ?? "error")"
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                  self.refreshCoins()
              }

@@ -33,11 +33,12 @@ protocol ViewControllerDelegate: AnyObject {
     func getAdPoints() -> Int
     func getTuna() -> Int
     func increasePhalanxCount()
+    func roundAndAbbreviate(num: Double) -> String
 }
 
 
 class ViewController: UIViewController, ViewControllerDelegate {
-    var coins: Int = 0
+    var coins: Int = 996
     var tuna: Int = 0
     var acquiredCats = [Cat(name: "Orange", description: "Does Nothing", image: UIImage(named: "Orange")!)]
     var selectedCat = "Orange"
@@ -100,7 +101,8 @@ class ViewController: UIViewController, ViewControllerDelegate {
         acquiredCats.append(cat)
     }
     func resetcoinsVC() {
-        coinLabel.text = "Coins: \(coins)"
+        let displayCoins: String = roundAndAbbreviate(num: Double(coins))
+        coinLabel.text = "Coins: \(displayCoins)"
     }
     func getCoins() -> Int{
         return coins
@@ -114,7 +116,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     func incrementCoins(increment: Int) {
         coins += increment
-        coinLabel.text = "Coins: \(coins)"
+        resetcoinsVC()
         guard let userID = Auth.auth().currentUser?.uid else {return}
         let upgrade = ["coins" : coins
            ]
@@ -265,6 +267,28 @@ class ViewController: UIViewController, ViewControllerDelegate {
         
     }
     
+    func roundAndAbbreviate(num: Double) -> String {
+        let thousand: Double = Double(num / 1000)
+        let million: Double = Double(num / 1000000)
+        let billion: Double = Double(num / 1000000000)
+        let trillion: Double = Double(num / 1000000000000)
+        let quadrillion: Double = Double(num / 1000000000000000)
+        if quadrillion >= 1.0 {
+            return "\(quadrillion.truncate(places: 2))Q"
+        } else if trillion >= 1.0 {
+            return "\(trillion.truncate(places: 2))T"
+        } else if billion >= 1.0 {
+            return "\(million.truncate(places: 2))B"
+        } else if million >= 1.0 {
+            return "\(million.truncate(places: 2))M"
+        } else if thousand >= 1.0 {
+            return "\(thousand.truncate(places: 2))K"
+            
+        } else {
+            return String(Int(num))
+        }
+        
+    }
     func animateCatOnPress() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .allowUserInteraction) {
             self.catImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -330,8 +354,12 @@ class ViewController: UIViewController, ViewControllerDelegate {
         performSegue(withIdentifier: "profileSegue", sender: nil)
     }
     
-    
+   
     
     
 }
-
+extension Double {
+    func truncate(places : Int)-> Double {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
+    }
+}
