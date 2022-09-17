@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>CatClick would like access to your photo gallery to create your avatar.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>CatClick would like access to your camera to create your avatar.</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-2692883151832197~9789348545</string>
 	<key>SKAdNetworkItems</key>

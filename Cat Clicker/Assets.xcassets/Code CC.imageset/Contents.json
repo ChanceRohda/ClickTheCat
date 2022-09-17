@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Tutorial Screen iPhone@1x.png",
+      "filename" : "Code CC@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Tutorial Screen iPhone@2x.png",
+      "filename" : "Code CC@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Tutorial Screen iPhone@3x.png",
+      "filename" : "Code CC@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

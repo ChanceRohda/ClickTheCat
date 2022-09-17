@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import FirebaseAuth
 class RootManager {
     
     static func login() {
@@ -17,6 +17,7 @@ class RootManager {
         UIApplication.shared.windows.first?.rootViewController = navVC
     }
     static func logout() {
+        try? Auth.auth().signOut()
         let authStoryboard = UIStoryboard(name: "Auth", bundle: nil)
         let authRootVC = authStoryboard.instantiateViewController(withIdentifier: "AuthRootViewController")
         let navVC = UINavigationController(rootViewController: authRootVC)

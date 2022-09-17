@@ -32,12 +32,12 @@
 		1FDEFED228A028B9002BBCE9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEFED128A028B9002BBCE9 /* FirebaseStorage */; };
 		1FDEFED428A02975002BBCE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FDEFED328A02964002BBCE9 /* GoogleService-Info.plist */; };
 		1FDEFED628A02B8D002BBCE9 /* RootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFED528A02B8B002BBCE9 /* RootManager.swift */; };
-		1FDEFED928A033B5002BBCE9 /* CoinsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFED828A033B5002BBCE9 /* CoinsModel.swift */; };
 		1FDEFEDB28A03415002BBCE9 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEDA28A03414002BBCE9 /* UserModel.swift */; };
 		1FDEFEDD28A2DE77002BBCE9 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEDC28A2DE76002BBCE9 /* LeaderboardTableViewCell.swift */; };
 		1FDEFEDF28A2E0C3002BBCE9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEDE28A2E0C3002BBCE9 /* ProfileViewController.swift */; };
 		1FDEFEE128A5AA57002BBCE9 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEE028A5AA55002BBCE9 /* LeaderboardViewController.swift */; };
 		1FDEFEE328AC7604002BBCE9 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEFEE228AC7603002BBCE9 /* TutorialViewController.swift */; };
+		1FDEFEE628B2B007002BBCE9 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEFEE528B2B007002BBCE9 /* SDWebImage */; };
 		1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76427DD290E009C7770 /* AppDelegate.swift */; };
 		1FE5C76727DD290E009C7770 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76627DD290E009C7770 /* SceneDelegate.swift */; };
 		1FE5C76927DD290E009C7770 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE5C76827DD290E009C7770 /* ViewController.swift */; };
@@ -65,7 +65,6 @@
 		1FDEFEC328A00AF7002BBCE9 /* dog.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dog.mp3; sourceTree = "<group>"; };
 		1FDEFED328A02964002BBCE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1FDEFED528A02B8B002BBCE9 /* RootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootManager.swift; sourceTree = "<group>"; };
-		1FDEFED828A033B5002BBCE9 /* CoinsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsModel.swift; sourceTree = "<group>"; };
 		1FDEFEDA28A03414002BBCE9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		1FDEFEDC28A2DE76002BBCE9 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		1FDEFEDE28A2E0C3002BBCE9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 			files = (
 				1FDEFECE28A028B9002BBCE9 /* FirebaseDatabase in Frameworks */,
 				1FDEFEC828A028B9002BBCE9 /* FirebaseAnalytics in Frameworks */,
+				1FDEFEE628B2B007002BBCE9 /* SDWebImage in Frameworks */,
 				1FDEFECC28A028B9002BBCE9 /* FirebaseCrashlytics in Frameworks */,
 				1FDEFECA28A028B9002BBCE9 /* FirebaseAuth in Frameworks */,
 				1FDEFED228A028B9002BBCE9 /* FirebaseStorage in Frameworks */,
@@ -109,15 +109,6 @@
 				1F2349692885D71E009B3375 /* AchievementCollectionViewCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		1FDEFED728A03392002BBCE9 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1FDEFED828A033B5002BBCE9 /* CoinsModel.swift */,
-				1FDEFEDA28A03414002BBCE9 /* UserModel.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		1FE5C75827DD290D009C7770 = {
@@ -152,7 +143,7 @@
 				1F07A5132810E2D800DB4A93 /* CrateShopViewController.swift */,
 				1F07A517282C79F400DB4A93 /* catMenuViewController.swift */,
 				1F2349672885D32E009B3375 /* StatsAchievementsViewController.swift */,
-				1FDEFED728A03392002BBCE9 /* Models */,
+				1FDEFEDA28A03414002BBCE9 /* UserModel.swift */,
 				1F4C006D287882D800FB89D8 /* Cells */,
 				1FDEFEBB289D5652002BBCE9 /* Auth.storyboard */,
 				1FDEFEE228AC7603002BBCE9 /* TutorialViewController.swift */,
@@ -193,6 +184,7 @@
 				1FDEFECD28A028B9002BBCE9 /* FirebaseDatabase */,
 				1FDEFECF28A028B9002BBCE9 /* FirebaseFirestore */,
 				1FDEFED128A028B9002BBCE9 /* FirebaseStorage */,
+				1FDEFEE528B2B007002BBCE9 /* SDWebImage */,
 			);
 			productName = "Cat Clicker";
 			productReference = 1FE5C76127DD290E009C7770 /* Cat Clicker.app */;
@@ -225,6 +217,7 @@
 			packageReferences = (
 				1F23496B288DA90E009B3375 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1FDEFEE428B2B002002BBCE9 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 1FE5C76227DD290E009C7770 /* Products */;
 			projectDirPath = "";
@@ -260,7 +253,6 @@
 				1F2349682885D32E009B3375 /* StatsAchievementsViewController.swift in Sources */,
 				1FDEFEDD28A2DE77002BBCE9 /* LeaderboardTableViewCell.swift in Sources */,
 				1F23496A2885D71E009B3375 /* AchievementCollectionViewCell.swift in Sources */,
-				1FDEFED928A033B5002BBCE9 /* CoinsModel.swift in Sources */,
 				1FDEFEBE289EFA24002BBCE9 /* AuthRootViewController.swift in Sources */,
 				1FDEFEC0289EFA32002BBCE9 /* LoginViewController.swift in Sources */,
 				1F07A51A2831512F00DB4A93 /* CatTableViewCell.swift in Sources */,
@@ -432,10 +424,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cat Clicker/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = CatClick;
+				INFOPLIST_KEY_NSCameraUsageDescription = "CatClick would like access to your camera to create your avatar.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CatClick would like access to your photo gallery to create your avatar.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -464,10 +458,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cat Clicker/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = CatClick;
+				INFOPLIST_KEY_NSCameraUsageDescription = "CatClick would like access to your camera to create your avatar.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CatClick would like access to your photo gallery to create your avatar.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -525,6 +521,14 @@
 				kind = branch;
 			};
 		};
+		1FDEFEE428B2B002002BBCE9 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -562,6 +566,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FDEFEC628A028B9002BBCE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		1FDEFEE528B2B007002BBCE9 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FDEFEE428B2B002002BBCE9 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

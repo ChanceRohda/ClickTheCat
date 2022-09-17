@@ -18,15 +18,31 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
 
+    
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     weak var viewControllerClass: ViewControllerDelegate?
+    var tap: UITapGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-
+        tap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        acquiredCats = (viewControllerClass?.getCatList())!
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(keyboardAppeared), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardDisappeared), name: UIResponder.keyboardWillHideNotification, object: nil)
         // Do any additional setup after loading the view.
+    }
+    @objc func keyboardAppeared() {
+        view.addGestureRecognizer(tap!)
+    }
+    @objc func keyboardDisappeared() {
+        view.removeGestureRecognizer(tap!)
+    }
+    
+    @objc func viewTapped() {
+        view.endEditing(true)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let catItem = acquiredCats[indexPath.row]
@@ -43,8 +59,9 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
         return 204
     }
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       print("tapped")
        let catItem = acquiredCats[indexPath.row]
-       viewControllerClass?.changeSelectedCat(cat: Cat(name: catItem.name, description: catItem.description, image: catItem.image))
+       viewControllerClass?.changeSelectedCat(cat: catItem)
        
    }
 

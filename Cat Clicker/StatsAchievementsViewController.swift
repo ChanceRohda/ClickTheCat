@@ -7,12 +7,6 @@
 
 import UIKit
 
-
-
-
-
-
-
 class StatsAchievementsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!

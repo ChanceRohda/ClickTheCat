@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import Firebase
+import FirebaseDatabase
 struct Achievement {
     var completedImage: UIImage
     var description: String
@@ -38,8 +39,9 @@ protocol ViewControllerDelegate: AnyObject {
 
 
 class ViewController: UIViewController, ViewControllerDelegate {
-    var coins: Int = 996
+    var coins: Int = 0
     var tuna: Int = 0
+    var firebaseAcquiredCats: [String] = ["Orange"]
     var acquiredCats = [Cat(name: "Orange", description: "Does Nothing", image: UIImage(named: "Orange")!)]
     var selectedCat = "Orange"
     var cpc: Int = 1
@@ -50,6 +52,16 @@ class ViewController: UIViewController, ViewControllerDelegate {
     var achievements: [Achievement] = [Achievement(completedImage: UIImage(named: "Alien Cat")!, description: "Click 1000 Times", isComplete: false), Achievement(completedImage: UIImage(named: "Time Cat")!, description: "Click 1 Million Times", isComplete: false), Achievement(completedImage: UIImage(named: "Ad Cat")!, description: "Watch 50 Ads", isComplete: false)]
     var adPoints = 0
     var phalanx = 0
+    var achievement1IsComplete: Bool {
+        return achievements[0].isComplete
+    }
+    var achievement2IsComplete: Bool {
+        return achievements[1].isComplete
+    }
+    var achievement3IsComplete: Bool {
+        return achievements[2].isComplete
+    }
+    
     
     
     @IBOutlet weak var coinLabel: UILabel!
@@ -61,6 +73,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     func increaseAdPoints(increment: Int) {
        adPoints += increment
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["adPoints" : adPoints]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
     }
     func getSelectedCat() -> String {
         return selectedCat
@@ -68,6 +83,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
     func zeroCoins() {
         if coins < 0 {
             coins = 0
+            guard let userID = Auth.auth().currentUser?.uid else {return}
+            let upgrade = ["coins" : 0]
+            UserModel.collection.child(userID).updateChildValues(upgrade)
         }
         
     }
@@ -77,11 +95,17 @@ class ViewController: UIViewController, ViewControllerDelegate {
     func zeroCpC() {
         if cpc < 1 {
             cpc = 1
+            guard let userID = Auth.auth().currentUser?.uid else {return}
+            let upgrade = ["cpc" : cpc]
+            UserModel.collection.child(userID).updateChildValues(upgrade)
         }
         
     }
     func increasePhalanxCount() {
         phalanx += 1
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["phalanx" : phalanx]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
     }
     func getTuna() -> Int {
         return tuna
@@ -90,6 +114,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
     
     func increaseTuna(amount: Int) {
         tuna += amount
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["tuna" : tuna]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
     }
     func getCps() -> Int {
         return cps
@@ -99,6 +126,16 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     func addCat(cat: Cat) {
         acquiredCats.append(cat)
+        firebaseAcquiredCats.append(cat.name)
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        //var catsForFirebase = firebaseAcquiredCats.map { (key: Int, value: String) in
+         //   return value
+        //}
+        let upgrade = ["firebaseAcquiredCats" : firebaseAcquiredCats]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
+        print("cat acquired")
     }
     func resetcoinsVC() {
         let displayCoins: String = roundAndAbbreviate(num: Double(coins))
@@ -109,6 +146,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     func upgrade(coinDecrement: Int, cpcIncrement: Int) {
         coins -= coinDecrement
+        if selectedCat == "Gazillionaire Cat" && coinDecrement < 0 {
+            coins -= coinDecrement
+        }
         cpc += cpcIncrement
         guard let userID = Auth.auth().currentUser?.uid else {return}
         let upgrade = ["coins" : coins, "cpc" : cpc]
@@ -116,17 +156,27 @@ class ViewController: UIViewController, ViewControllerDelegate {
     }
     func incrementCoins(increment: Int) {
         coins += increment
+        if selectedCat == "Gazillionaire Cat" {
+            coins += increment
+        }
         resetcoinsVC()
         guard let userID = Auth.auth().currentUser?.uid else {return}
-        let upgrade = ["coins" : coins
-           ]
+        let upgrade = ["coins" : coins]
         UserModel.collection.child(userID).updateChildValues(upgrade)
     }
     func increaseCps(amount: Int) {
         cps += amount
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["cps" : cps]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
     }
     func changeSelectedCat(cat: Cat) {
         selectedCat = cat.name
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["selectedCat" : selectedCat]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
+        catImageView.image = UIImage(named: selectedCat)
+        print(selectedCat)
     }
     func getTotalClicks() -> Int {
         return clicks
@@ -147,8 +197,6 @@ class ViewController: UIViewController, ViewControllerDelegate {
             destinationVC.viewControllerClass = self
         }
         if let destinationVC = segue.destination as? catMenuViewController {
-            destinationVC.acquiredCats = acquiredCats
-            
             destinationVC.viewControllerClass = self
         }
         if let destinationVC = segue.destination as? AdViewController {
@@ -159,21 +207,85 @@ class ViewController: UIViewController, ViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         callcps()
-        if coins == 0 {
-            dogRewardLabel.text = "Tap the Cat!"
-        }
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(catDidClick(_:)))
         catImageView.addGestureRecognizer(tap)
         catImageView.isUserInteractionEnabled = true
         guard let userID = Auth.auth().currentUser?.uid else {return}
-        UserModel.collection.child(userID).observeSingleEvent(of: .value) { snapshot in
+        Database.database().reference().child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
             guard let data = snapshot.value as? [String: Any] else {return}
-            guard let coins = data["coins"] as? Int else {return}
-            self.coinLabel.text = "Coins: \(coins)"
+            print("Data Recieved: \(data)")
+            let coins = data["coins"] as? Int ?? 0
             self.coins = coins
-            Timer.scheduledTimer(timeInterval: self.timerIncrement, target: self, selector: #selector(self.callcps), userInfo: nil, repeats: true)
+            self.coinLabel.text = "Coins: \(coins)"
+            let tuna = data["tuna"] as? Int ?? 0
+            let clicks = data["clicks"] as? Int ?? 0
+            let adPoints = data["adPoints"] as? Int ?? 0
+            let phalanx = data["phalanx"] as? Int ?? 0
+            self.firebaseAcquiredCats = data["firebaseAcquiredCats"] as? [String] ?? ["failed at ViewController ViewDidLoad"]
+            
+            for cat in self.firebaseAcquiredCats {
+                if cat == "Gray" {
+                    self.acquiredCats.append(Cat(name: "Gray", description: "+5% Autocoin", image: UIImage(named: "Gray")!))
+                }
+                if cat == "Cool" {
+                    self.acquiredCats.append(Cat(name: "Cool", description: "More Autocoin in Crates", image: UIImage(named: "Cool")!))
+                }
+                if cat == "Dog" {
+                    self.acquiredCats.append(Cat(name: "Dog", description: "Might dig up treasure!", image: UIImage(named: "Dog")!))
+                }
+                if cat == "Phalanx Cat" {
+                    self.acquiredCats.append(Cat(name: "Phalanx Cat", description: "More Autocoin the more you collect!", image: UIImage(named: "Phalanx Cat")!))
+                }
+                if cat == "Easter Egg" {
+                    self.acquiredCats.append(Cat(name: "Easter Egg", description: "You found the Easter Egg!", image: UIImage(named: "Easter Egg")!))
+                }
+                if cat == "Alien Cat" {
+                    self.acquiredCats.append(Cat(name: "Alien Cat", description: "x1.5 CpC", image: UIImage(named: "Alien Cat")!))
+                }
+                if cat == "Time Cat" {
+                    self.acquiredCats.append(Cat(name: "Time Cat", description: "x3 CpC, x3 Autocoin", image: UIImage(named: "Time Cat")!))
+                }
+                if cat == "Ad Cat" {
+                    self.acquiredCats.append(Cat(name: "Ad Cat", description: "More Ad Rewards", image: UIImage(named: "Ad Cat")!))
+                }
+                if cat == "Gazillionaire Cat" {
+                    self.acquiredCats.append(Cat(name: "Gazillionaire Cat", description: "Double Coins from everywhere!", image: UIImage(named: "Gazillionaire Cat")!))
+                }
+                if cat == "Cat Food Cat" {
+                    self.acquiredCats.append(Cat(name: "Cat Food Cat", description: "Cat Food Upgrades +Autocoin", image: UIImage(named: "Cat Food Cat")!))
+                }
+                if cat == "Gold Cat" {
+                    self.acquiredCats.append(Cat(name: "Gold Cat", description: "Ads Give More Gold", image: UIImage(named: "Gold Cat")!))
+                }
+            }
+            
+            print("")
+            print(self.firebaseAcquiredCats)
+            print("")
+            if let selectedCat = data["selectedCat"] as? String {
+                self.selectedCat = selectedCat
+                self.catImageView.image = UIImage(named: selectedCat)
+            }
+            self.clicks = clicks
+            self.adPoints = adPoints
+            self.tuna = tuna
+            self.phalanx = phalanx
+            
         }
-        
+        if coins == 0 {
+            dogRewardLabel.text = "Tap the Cat!"
+        }
+        Timer.scheduledTimer(timeInterval: self.timerIncrement, target: self, selector: #selector(self.callcps), userInfo: nil, repeats: true)
+        if achievement1IsComplete == true {
+            achievements[0].isComplete = true
+        }
+        if achievement2IsComplete == true {
+            achievements[1].isComplete = true
+        }
+        if achievement3IsComplete == true {
+            achievements[2].isComplete = true
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         if coins > 0 {
@@ -182,12 +294,15 @@ class ViewController: UIViewController, ViewControllerDelegate {
             
         
         
-        catImageView.image = UIImage(named: selectedCat)
+        
         if adPoints >= 50 && !acquiredCats.contains(where: { cat in
             return cat.name == "Ad Cat"
         }){
             achievements[2].isComplete = true
             addCat(cat: Cat(name: "Ad Cat", description: "More Ad Rewards", image: UIImage(named: "Ad Cat")!))
+            guard let userID = Auth.auth().currentUser?.uid else {return}
+            let upgrade = ["achievement2IsComplete" : true]
+            UserModel.collection.child(userID).updateChildValues(upgrade)
         }
     }
 
@@ -196,7 +311,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
         dogRewardLabel.text = ""
         incrementCoins(increment: cpc)
         clicks += 1
-        
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["clicks" : clicks]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
         if selectedCat == "Time Cat"{
             incrementCoins(increment: cpc)
             incrementCoins(increment: cpc)
@@ -235,6 +352,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
             achievements[0].isComplete = true
             addCat(cat: Cat(name: "Alien Cat", description: "x1.5 CpC", image: UIImage(named: "Alien Cat")!))
             dogRewardLabel.text = "Alien Cat Earned!"
+            guard let userID = Auth.auth().currentUser?.uid else {return}
+            let upgrade = ["achievement1IsComplete" : true]
+            UserModel.collection.child(userID).updateChildValues(upgrade)
         }
         if clicks > 999999 && !acquiredCats.contains(where: { cat in
             return cat.name == "Time Cat"
@@ -242,6 +362,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
             achievements[1].isComplete = true
             addCat(cat: Cat(name: "Time Cat", description: "x3 CpC, x3 Autocoin", image: UIImage(named: "Time Cat")!))
             dogRewardLabel.text = "Time Cat Earned!"
+            guard let userID = Auth.auth().currentUser?.uid else {return}
+            let upgrade = ["achievement3IsComplete" : true]
+            UserModel.collection.child(userID).updateChildValues(upgrade)
         }
         
         playSound()
@@ -278,7 +401,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
         } else if trillion >= 1.0 {
             return "\(trillion.truncate(places: 2))T"
         } else if billion >= 1.0 {
-            return "\(million.truncate(places: 2))B"
+            return "\(billion.truncate(places: 2))B"
         } else if million >= 1.0 {
             return "\(million.truncate(places: 2))M"
         } else if thousand >= 1.0 {
@@ -326,6 +449,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
             self.coins += cps
         }
         self.resetcoinsVC()
+        
     }
     @IBAction func shopButtonDidClick(_ sender: Any) {
         performSegue(withIdentifier: "shopSegue", sender: nil)

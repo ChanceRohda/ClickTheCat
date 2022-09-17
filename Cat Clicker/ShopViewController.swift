@@ -6,7 +6,9 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 struct Upgrade {
     var cost: Int
     var autocoin: Int
@@ -30,7 +32,11 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.upgradeImageView.image = upgradeItem.image
         cell.upgradeNameLabel.text = upgradeItem.name
         cell.upgradeCostLabel.text = "Cost: \(upgradeItem.displayCost)"
+        if upgradeItem.name != "Gazillionaire Cat" {
         cell.upgradeAutocoinLabel.text = "\(upgradeItem.displayAutocoin) Autocoin"
+        } else {
+            cell.upgradeAutocoinLabel.text = upgradeItem.displayAutocoin
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -51,7 +57,10 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                     viewControllerClass?.increaseCps(amount: purchasedUpgrade.autocoin)
                 }
             } else {
-                
+                viewControllerClass?.upgrade(coinDecrement: purchasedUpgrade.cost, cpcIncrement: 0)
+                viewControllerClass?.addCat(cat: Cat(name: "Gazillionaire Cat", description: "Double Coins from everywhere!", image: UIImage(named: "Gazillionaire Cat")!))
+                UpgradesManager.shared.upgrades.remove(at: 16)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
     }
@@ -80,9 +89,19 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         //    createUpgrade()
         //}
         if UpgradesManager.shared.upgrades.count == 0 {
-            createUpgrade()
+          createUpgrade()
+        } else {
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        Database.database().reference().child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
+            guard let data = snapshot.value as? [String: Any] else {return}
+            guard let upgradeNumber = data["upgradeNumber"] as? Int else {return}
+            for i in 1...upgradeNumber {
+                self.createUpgrade()
+            }
         }
+            
         }
+    }
         // Do any additional setup after loading the view.
     override func viewWillDisappear(_ animated: Bool) {
         viewControllerClass?.resetcoinsVC()
@@ -101,13 +120,29 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     func createUpgrade() {
-        if UpgradesManager.shared.upgrades.count < 10 {
+        if UpgradesManager.shared.upgrades.count < 16 {
+            let upgradeNumber = UpgradesManager.shared.upgrades.count
             let biggestUpgrade = UpgradesManager.shared.biggestUpgrade
             let displayCost = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade * 10)))
             let displayAutocoin = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade)))
             UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 10, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)", displayCost: displayCost, displayAutocoin: displayAutocoin))
         UpgradesManager.shared.biggestUpgrade *= 10
+            guard let userID = Auth.auth().currentUser?.uid else {return}
+            let upgrade = ["upgradeNumber" : upgradeNumber]
+            UserModel.collection.child(userID).updateChildValues(upgrade)
+        //upgradeTableView.reloadData()
+        } else {
+            let catList = viewControllerClass?.getCatList()
+            if !catList!.contains(where: { cat in
+                 return cat.name == "Gazillionaire Cat"
+             }){
+                if !UpgradesManager.shared.upgrades.contains(where: { upgrade in
+                    return upgrade.name == "Gazillionaire Cat"
+                }){
+                UpgradesManager.shared.upgrades.append(Upgrade(cost: 10000000000000000, autocoin: 0, image: UIImage(named: "Gazillionaire Cat")!, name: "Gazillionaire Cat", displayCost: "10Q", displayAutocoin: "Double Coins from Everywhere!"))
+                }
+             }
+        }
         upgradeTableView.reloadData()
-    }
     }
 }

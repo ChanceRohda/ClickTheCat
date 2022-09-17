@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import FirebaseAuth
+import FirebaseDatabase
 struct Crate {
     var name: String
     var cost: Int
@@ -24,7 +25,7 @@ struct Crate {
     
 }
 
-// Keywords: cpc, tuna, cps, coins, negCoins, negCpC
+
 
 class CrateShopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -71,7 +72,7 @@ class CrateShopViewController: UIViewController, UITableViewDelegate, UITableVie
                 if coins >= purchasedCrate.cost && tuna >= purchasedCrate.tunacost! {
                     let crateContent = purchasedCrate.contents.randomElement()
                     viewControllerClass?.upgrade(coinDecrement: purchasedCrate.cost, cpcIncrement: 0)
-                    viewControllerClass?.increaseTuna(amount: purchasedCrate.tunacost! * -1)
+                    viewControllerClass?.increaseTuna(amount: purchasedCrate.tunacost ?? 0 * -1)
                     tunaLabel.text = "Tuna: \(viewControllerClass!.getTuna())"
                     if crateContent == "cpc" {
                         viewControllerClass?.upgrade(coinDecrement: 0, cpcIncrement: purchasedCrate.cpcReward!)
