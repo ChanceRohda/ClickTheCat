@@ -220,8 +220,12 @@ class ViewController: UIViewController, ViewControllerDelegate {
             self.coinLabel.text = "Coins: \(coins)"
             let tuna = data["tuna"] as? Int ?? 0
             let clicks = data["clicks"] as? Int ?? 0
+            let cps = data["cps"] as? Int ?? 0
+            let cpc = data["cpc"] as? Int ?? 1
             let adPoints = data["adPoints"] as? Int ?? 0
             let phalanx = data["phalanx"] as? Int ?? 0
+            self.cpc = cpc
+            self.cps = cps
             self.firebaseAcquiredCats = data["firebaseAcquiredCats"] as? [String] ?? ["failed at ViewController ViewDidLoad"]
             
             for cat in self.firebaseAcquiredCats {

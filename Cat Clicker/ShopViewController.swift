@@ -88,19 +88,27 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         //for i in 1...30 {
         //    createUpgrade()
         //}
-        if UpgradesManager.shared.upgrades.count == 0 {
-          createUpgrade()
-        } else {
+         
         guard let userID = Auth.auth().currentUser?.uid else {return}
         Database.database().reference().child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
             guard let data = snapshot.value as? [String: Any] else {return}
             guard let upgradeNumber = data["upgradeNumber"] as? Int else {return}
-            for i in 1...upgradeNumber {
+            if upgradeNumber == 0 {
                 self.createUpgrade()
+            } else {
+            UpgradesManager.shared.upgrades.removeAll()
+                UpgradesManager.shared.biggestUpgrade = 1
+                for _ in 1...upgradeNumber {
+                self.createUpgrade()
+            }
+                guard let userID = Auth.auth().currentUser?.uid else {return}
+                let upgradeNumber = UpgradesManager.shared.upgrades.count
+                let upgrade = ["upgradeNumber" : upgradeNumber]
+                UserModel.collection.child(userID).updateChildValues(upgrade)
             }
         }
             
-        }
+        
     }
         // Do any additional setup after loading the view.
     override func viewWillDisappear(_ animated: Bool) {
@@ -121,15 +129,14 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func createUpgrade() {
         if UpgradesManager.shared.upgrades.count < 16 {
-            let upgradeNumber = UpgradesManager.shared.upgrades.count
             let biggestUpgrade = UpgradesManager.shared.biggestUpgrade
             let displayCost = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade * 10)))
             let displayAutocoin = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade)))
             UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 10, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)", displayCost: displayCost, displayAutocoin: displayAutocoin))
         UpgradesManager.shared.biggestUpgrade *= 10
-            guard let userID = Auth.auth().currentUser?.uid else {return}
-            let upgrade = ["upgradeNumber" : upgradeNumber]
-            UserModel.collection.child(userID).updateChildValues(upgrade)
+            
+            
+            
         //upgradeTableView.reloadData()
         } else {
             let catList = viewControllerClass?.getCatList()

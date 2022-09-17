@@ -49,7 +49,7 @@ class AdViewController: UIViewController {
     
     func loadRewardedAd() {
         let request = GADRequest()
-        GADRewardedAd.load(withAdUnitID:"ca-app-pub-3940256099942544/1712485313",
+        GADRewardedAd.load(withAdUnitID:"ca-app-pub-2692883151832197/4345450176",
                            request: request,
                            completionHandler: { [self] ad, error in
           if let error = error {
