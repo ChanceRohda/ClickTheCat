@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let navVC = UINavigationController(rootViewController: authRootVC)
             self.window?.rootViewController = navVC
         }
-        
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

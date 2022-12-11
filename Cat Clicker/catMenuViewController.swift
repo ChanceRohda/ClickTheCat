@@ -60,11 +60,27 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
     }
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        print("tapped")
+       
        let catItem = acquiredCats[indexPath.row]
        viewControllerClass?.changeSelectedCat(cat: catItem)
-       
+       let alert = UIAlertController(title: "Cat selected!", message: "You selected a cat!", preferredStyle: .alert)
+       let okAction = UIAlertAction(title: "OK", style: .default) { action in
+           alert.dismiss(animated: true, completion: nil)
+       }
+       alert.addAction(okAction)
+       present(alert, animated: true, completion: nil)
    }
 
+    @IBAction func infoButtonDidTouch(_ sender: Any) {
+        let alert = UIAlertController(title: "Cat Collection", message: "Here are your cats! Click one to select it and use its effect.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { action in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func enterCodeButtonDidTouch(_ sender: Any) {
         var code: String = codeTextField.text ?? "CatClick"
         var catList = viewControllerClass?.getCatList()
@@ -75,6 +91,12 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
             acquiredCats = (viewControllerClass?.getCatList())!
             tableView.reloadData()
             codeTextField.text = ""
+            let alert = UIAlertController(title: "Cool!", message: "You got a cat!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default) { action in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
         } else if code == "2022" && !catList!.contains(where: { cat in
             return cat.name == "Gold Cat"
         }){
@@ -82,10 +104,46 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
             acquiredCats = (viewControllerClass?.getCatList())!
             tableView.reloadData()
             codeTextField.text = ""
+            let alert = UIAlertController(title: "Cool!", message: "You got a cat!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default) { action in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            
+            
+        } else if code == "1031" && !catList!.contains(where: { cat in
+            return cat.name == "Cat-O-Lantern"
+        }){
+            viewControllerClass?.addCat(cat: Cat(name: "Cat-O-Lantern", description: "x2 CpC with a scary twist!", image: UIImage(named: "Cat-O-Lantern")!))
+            acquiredCats = (viewControllerClass?.getCatList())!
+            tableView.reloadData()
+            codeTextField.text = ""
+            let alert = UIAlertController(title: "Cool!", message: "You got a cat!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default) { action in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            
+            
+        } else if code == "4632" && !catList!.contains(where: { cat in
+            return cat.name == "Salak Cat"
+        }){
+            viewControllerClass?.addCat(cat: Cat(name: "Salak Cat", description: "More Tuna from Crates!", image: UIImage(named: "Salak Cat")!))
+            acquiredCats = (viewControllerClass?.getCatList())!
+            tableView.reloadData()
+            codeTextField.text = ""
+            let alert = UIAlertController(title: "Cool!", message: "You got a cat!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default) { action in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
             
             
         } else {
-            let alert = UIAlertController(title: "Nope!", message: "That's not a valid code.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Nope!", message: "Not a valid code.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default) { action in
                 alert.dismiss(animated: true, completion: nil)
             }

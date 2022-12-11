@@ -11,7 +11,7 @@ import FirebaseDatabase
 class LoginViewController: UIViewController {
     @IBOutlet weak var eyeButton: UIButton!
     
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,8 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
     }
     @IBAction func loginButtonDidTouch(_ sender: Any) {
-        guard let email = emailTextField.text else {return}
+        guard let username = usernameTextField.text?.lowercased() else {return}
+        let email = username + "@gmail.com"
         guard let password = passwordTextField.text else {return}
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -41,8 +42,8 @@ class LoginViewController: UIViewController {
                         errorTitle = "Wrong Password"
                         errorMessage = "Your password is incorrect"
                     case .invalidEmail:
-                        errorTitle = "Invalid Email"
-                        errorMessage = "The email you provided is invalid"
+                        errorTitle = "Invalid Username"
+                        errorMessage = "The username you provided is invalid"
                     default:
                         break
                     }

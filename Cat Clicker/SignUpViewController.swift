@@ -12,7 +12,7 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet weak var eyeButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
+
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +33,15 @@ class SignUpViewController: UIViewController {
     
 
     @IBAction func createAccountButtonDidTouch(_ sender: Any) {
-        guard let username = usernameTextField.text else {return}
-        guard let email = emailTextField.text else {return}
+        guard let username = usernameTextField.text?.lowercased() else {return}
+        if username.hasProfanity() {
+            let alert = UIAlertController(title: "Username Invalid", message: "Usernames cannot contain profanity", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(okAction)
+            present(alert, animated: true)
+            return
+        }
+        let email = username + "@gmail.com"
         guard let password = passwordTextField.text else {return}
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -44,17 +51,17 @@ class SignUpViewController: UIViewController {
                 if let errCode = AuthErrorCode.Code(rawValue: error._code) {
                     switch errCode {
                     case .emailAlreadyInUse:
-                        errorTitle = "Email In Use"
-                        errorMessage = "The email you provided is already in use"
+                        errorTitle = "Username In Use"
+                        errorMessage = "The username you provided is already in use"
                     case .missingEmail:
-                        errorTitle = "Email Is Required"
-                        errorMessage = "Enter an email"
+                        errorTitle = "Username Is Required"
+                        errorMessage = "Enter a username"
                     case .weakPassword:
                         errorTitle = "Weak Password"
                         errorMessage = "Please improve your password strength"
                     case .invalidEmail:
-                        errorTitle = "Email is Invalid"
-                        errorMessage = "Please enter a valid email"
+                        errorTitle = "Username is Invalid"
+                        errorMessage = "Please enter a valid username"
                     default:
                         break
                     }

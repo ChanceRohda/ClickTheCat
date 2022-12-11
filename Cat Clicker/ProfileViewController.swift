@@ -46,6 +46,12 @@ class ProfileViewController: UIViewController {
     }
     @objc func selectImage() {
         let alert = UIAlertController(title: "Select Image", message: nil, preferredStyle: .actionSheet)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+        }
+            
+        
         let takePhotoAction = UIAlertAction(title: "Take Photo", style: .default) { action in
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let imagePicker = UIImagePickerController()
@@ -71,7 +77,19 @@ class ProfileViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-
+    @IBAction func logOutButtonDidTouch(_ sender: Any) {
+        RootManager.logout()
+    }
+    
+    @IBAction func infoButtonDidTouch(_ sender: Any) {
+        let alert = UIAlertController(title: "Profile", message: "Here is your profile. Click your avatar to change it!", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { action in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     func uploadImage(image: UIImage) {
         guard let imageData = image.jpegData(compressionQuality: 0.7) else {
             print("could not convert image to jpeg")
@@ -110,6 +128,24 @@ class ProfileViewController: UIViewController {
     }
     
     
+    @IBAction func deleteAccountButtonDidTouch(_ sender: Any) {
+        let alert = UIAlertController(title: "Are you sure?", message: "Account deletion is irreversible.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            guard let currentUser = Auth.auth().currentUser else {return}
+            UserModel.collection.child(currentUser.uid).removeValue()
+            currentUser.delete(completion: { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                RootManager.logout()
+            })
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
     
     
 }
@@ -123,6 +159,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {return}
+        
         avatarImageView.image = image
         uploadImage(image: image)
         dismiss(animated: true)

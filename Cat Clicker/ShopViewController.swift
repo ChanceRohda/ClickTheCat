@@ -41,16 +41,16 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let coins = viewControllerClass?.getCoins()
-        var purchasedUpgrade = UpgradesManager.shared.upgrades[indexPath.row]
+        let purchasedUpgrade = UpgradesManager.shared.upgrades[indexPath.row]
         if coins! >= purchasedUpgrade.cost {
             if purchasedUpgrade.name != "Gazillionaire Cat" {
-                if purchasedUpgrade.cost == UpgradesManager.shared.biggestUpgrade {
+                if purchasedUpgrade.cost == UpgradesManager.shared.biggestUpgrade * 10 {
                     createUpgrade()
                 }
             
                 viewControllerClass?.upgrade(coinDecrement: purchasedUpgrade.cost, cpcIncrement: 0)
                 viewControllerClass?.increaseCps(amount: purchasedUpgrade.autocoin)
-                var selectedCat = viewControllerClass?.getSelectedCat()
+                let selectedCat = viewControllerClass?.getSelectedCat()
                 if selectedCat == "Cat Food Cat" && purchasedUpgrade.name.contains("Food"){
                     let extraCpC = round(0.2 * Double(purchasedUpgrade.cost))
                     viewControllerClass?.increaseCps(amount: Int(extraCpC))
@@ -59,7 +59,11 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else {
                 viewControllerClass?.upgrade(coinDecrement: purchasedUpgrade.cost, cpcIncrement: 0)
                 viewControllerClass?.addCat(cat: Cat(name: "Gazillionaire Cat", description: "Double Coins from everywhere!", image: UIImage(named: "Gazillionaire Cat")!))
-                UpgradesManager.shared.upgrades.remove(at: 16)
+                UpgradesManager.shared.upgrades.remove(at: 8)
+                
+                guard let userID = Auth.auth().currentUser?.uid else {return}
+                let upgrade = ["gazAvailable" : false]
+                UserModel.collection.child(userID).updateChildValues(upgrade)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
@@ -92,20 +96,27 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let userID = Auth.auth().currentUser?.uid else {return}
         Database.database().reference().child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
             guard let data = snapshot.value as? [String: Any] else {return}
-            guard let upgradeNumber = data["upgradeNumber"] as? Int else {return}
+            guard var upgradeNumber = data["upgradeNumber"] as? Int else {return}
+            let gazAvailable = data["gazAvailable"] as? Bool
             if upgradeNumber == 0 {
-                self.createUpgrade()
-            } else {
-            UpgradesManager.shared.upgrades.removeAll()
-                UpgradesManager.shared.biggestUpgrade = 1
-                for _ in 1...upgradeNumber {
-                self.createUpgrade()
-            }
-                guard let userID = Auth.auth().currentUser?.uid else {return}
-                let upgradeNumber = UpgradesManager.shared.upgrades.count
+                upgradeNumber = 1
                 let upgrade = ["upgradeNumber" : upgradeNumber]
                 UserModel.collection.child(userID).updateChildValues(upgrade)
             }
+            UpgradesManager.shared.upgrades.removeAll()
+                UpgradesManager.shared.biggestUpgrade = 1
+                for _ in 1...upgradeNumber {
+                    print("ran that one function. you know what im talking about")
+                self.createUpgrade()
+            }
+            if gazAvailable == true {
+                self.createUpgrade()
+            }
+                guard let userID = Auth.auth().currentUser?.uid else {return}
+                //let upgradeNumber = UpgradesManager.shared.upgrades.count
+                let upgrade = ["upgradeNumber" : upgradeNumber]
+                UserModel.collection.child(userID).updateChildValues(upgrade)
+            
         }
             
         
@@ -127,17 +138,31 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         upgradeTableView.reloadData()
         
     }
+    
+
+    @IBAction func infoButtonDidTouch(_ sender: Any) {
+        let alert = UIAlertController(title: "Shop", message: "Buy upgrades and get autocoin! You get coins equal to your autocoin every 5 seconds.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { action in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     func createUpgrade() {
-        if UpgradesManager.shared.upgrades.count < 16 {
+        if UpgradesManager.shared.upgrades.count < 8 {
+            print("created upgrade")
             let biggestUpgrade = UpgradesManager.shared.biggestUpgrade
-            let displayCost = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade * 10)))
+            let displayCost = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade * 100)))
             let displayAutocoin = (viewControllerClass!.roundAndAbbreviate(num: Double(biggestUpgrade)))
-            UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 10, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)", displayCost: displayCost, displayAutocoin: displayAutocoin))
+            UpgradesManager.shared.upgrades.append(Upgrade(cost: biggestUpgrade * 100, autocoin: biggestUpgrade, image: UIImage(named: "Cat Food Cat")!, name: "Cat Food \(UpgradesManager.shared.upgrades.count + 1)", displayCost: displayCost, displayAutocoin: displayAutocoin))
         UpgradesManager.shared.biggestUpgrade *= 10
+            guard let userID = Auth.auth().currentUser?.uid else {return}
+            let upgrade = ["upgradeNumber" : UpgradesManager.shared.upgrades.count]
+            UserModel.collection.child(userID).updateChildValues(upgrade)
             
             
-            
-        //upgradeTableView.reloadData()
+        upgradeTableView.reloadData()
         } else {
             let catList = viewControllerClass?.getCatList()
             if !catList!.contains(where: { cat in
@@ -146,7 +171,10 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if !UpgradesManager.shared.upgrades.contains(where: { upgrade in
                     return upgrade.name == "Gazillionaire Cat"
                 }){
-                UpgradesManager.shared.upgrades.append(Upgrade(cost: 10000000000000000, autocoin: 0, image: UIImage(named: "Gazillionaire Cat")!, name: "Gazillionaire Cat", displayCost: "10Q", displayAutocoin: "Double Coins from Everywhere!"))
+                    guard let userID = Auth.auth().currentUser?.uid else {return}
+                    let upgrade = ["gazAvailable" : true]
+                    UserModel.collection.child(userID).updateChildValues(upgrade)
+                UpgradesManager.shared.upgrades.append(Upgrade(cost: 1000000000000000, autocoin: 0, image: UIImage(named: "Gazillionaire Cat")!, name: "Gazillionaire Cat", displayCost: "1Q", displayAutocoin: "Double Coins from Everywhere!"))
                 }
              }
         }

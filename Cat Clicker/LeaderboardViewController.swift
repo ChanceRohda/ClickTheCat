@@ -10,13 +10,15 @@ import FirebaseDatabase
 class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     weak var viewControllerClass: ViewControllerDelegate?
     var topUsers: [UserModel] = []
+    var place: Int = 1
     @IBOutlet weak var leaderboardTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         leaderboardTableView.delegate = self
         leaderboardTableView.dataSource = self
+        place = 1
         
-        Database.database().reference().child("users").queryOrdered(byChild: "coins").queryLimited(toLast: 10).observeSingleEvent(of: .value) { snapshot in
+        Database.database().reference().child("users").queryOrdered(byChild: "coins").queryLimited(toLast: 50).observeSingleEvent(of: .value) { snapshot in
             print(snapshot)
             guard let users = snapshot.value as? [String : Any] else {
                 print("users not found")
@@ -54,9 +56,13 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeaderboardTableViewCell") as! LeaderboardTableViewCell
         let user = topUsers[indexPath.row]
-        cell.usernameLabel.text = user.username
+        cell.usernameLabel.text = "\(indexPath.row + 1). \(user.username)"
+        //"\(place). \(user.username)"
+        //place += 1
+        
         cell.avatarImageView.sd_setImage(with: user.avatar, placeholderImage: UIImage(systemName: "person.fill")!)
-        cell.coinsLabel.text = "Coins: \(user.coins)"
+        let roundedAndAbbreviated = viewControllerClass?.roundAndAbbreviate(num: Double(user.coins))
+        cell.coinsLabel.text = "Coins: \(roundedAndAbbreviated ?? "0")"
         
         
         
