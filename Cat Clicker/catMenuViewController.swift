@@ -82,8 +82,8 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     @IBAction func enterCodeButtonDidTouch(_ sender: Any) {
-        var code: String = codeTextField.text ?? "CatClick"
-        var catList = viewControllerClass?.getCatList()
+        let code: String = codeTextField.text ?? "CatClick"
+        let catList = viewControllerClass?.getCatList()
         if code == "1033" && !catList!.contains(where: { cat in
             return cat.name == "Cat Food Cat"
         }){

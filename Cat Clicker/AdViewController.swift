@@ -54,7 +54,7 @@ class AdViewController: UIViewController {
     
     func loadRewardedAd() {
         let request = GADRequest()
-        GADRewardedAd.load(withAdUnitID:"ca-app-pub-2692883151832197/4345450176",
+        GADRewardedAd.load(withAdUnitID:"ca-app-pub-2692883151832197/5377041102",
                            request: request,
                            completionHandler: { [self] ad, error in
           if let error = error {
@@ -69,7 +69,7 @@ class AdViewController: UIViewController {
       }
     func show() {
         print("the function has not ran yet")
-        print(rewardedAd)
+        //print(rewardedAd)
       if let ad = rewardedAd {
           print("the function has ran")
           print(ad)
