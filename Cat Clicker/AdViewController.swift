@@ -10,15 +10,20 @@ struct Prize {
 }
 import FirebaseAuth
 import UIKit
+import StartApp
 import Firebase
 import GoogleMobileAds
-class AdViewController: UIViewController {
+class AdViewController: UIViewController, STADelegateProtocol {
     weak var viewControllerClass: ViewControllerDelegate?
     @IBOutlet weak var rewardImageView: UIImageView!
     @IBOutlet weak var rewardLabel: UILabel!
     var newDailyAdsWatched: Int = 0
     var possiblePrizes: [Prize] = []
+    var startAppRewarded: STAStartAppAd?
     override func viewDidLoad() {
+        startAppRewarded = STAStartAppAd()
+            // Loading the ad
+            startAppRewarded!.loadRewardedVideoAd(withDelegate: self);
         super.viewDidLoad()
         let coins = (viewControllerClass?.getCoins())!
         let autocoin = (viewControllerClass?.getCps())!
@@ -49,7 +54,7 @@ class AdViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
+    /*
     private var rewardedAd: GADRewardedAd?
     
     func loadRewardedAd() {
@@ -86,7 +91,12 @@ class AdViewController: UIViewController {
         print("Ad wasn't ready")
       }
     }
-    
+    */
+    func didCompleteVideo(_ ad: STAAbstractAd!) {
+        self.viewControllerClass?.increaseAdPoints(increment: 1)
+        self.dailyClickAdReward()
+        self.getReward()
+    }
     func dailyClickAdReward() {
         guard let userID = Auth.auth().currentUser?.uid else {return}
         DailyAdModel.collection.observeSingleEvent(of: .value) { snapshot in
@@ -120,7 +130,7 @@ class AdViewController: UIViewController {
     
     @IBAction func adButton(_ sender: Any) {
         if newDailyAdsWatched < 10 {
-            loadRewardedAd()
+            startAppRewarded!.show()
         } else {
             rewardLabel.text = "You have reached the daily ad limit. Come back tomorrow!"
         }

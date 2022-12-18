@@ -52,6 +52,7 @@
 		1FE5C76C27DD290E009C7770 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FE5C76A27DD290E009C7770 /* Main.storyboard */; };
 		1FE5C76E27DD290E009C7770 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FE5C76D27DD290E009C7770 /* Assets.xcassets */; };
 		1FE5C77127DD290E009C7770 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FE5C76F27DD290E009C7770 /* LaunchScreen.storyboard */; };
+		7ADAB994568259DBF9153E8F /* Pods_Cat_Clicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B110CCEF17F330370E40F8A /* Pods_Cat_Clicker.framework */; };
 		E10DC14A2918284A00B7264C /* AAProfanityFilter+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10DC1482918284A00B7264C /* AAProfanityFilter+Helper.swift */; };
 		E10DC14B2918284A00B7264C /* AAProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10DC1492918284A00B7264C /* AAProfanityFilter.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		1F3C101529200F3500D60644 /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		1F3C10172920126700D60644 /* DailyAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyAdModel.swift; sourceTree = "<group>"; };
 		1F3C10192921989E00D60644 /* paper.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = paper.mp3; sourceTree = "<group>"; };
+		1F416F21294F7D5C00C62A4D /* CatClicker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CatClicker-Bridging-Header.h"; path = "/Users/chancerohda/Desktop/CatClick6/Cat Clicker/ProfanityFilter/CatClicker-Bridging-Header.h"; sourceTree = "<absolute>"; };
 		1F4C006728678A9900FB89D8 /* CrateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrateTableViewCell.swift; sourceTree = "<group>"; };
 		1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeTableViewCell.swift; sourceTree = "<group>"; };
 		1FB46956291EAC7D002FB3F3 /* ProfanityWords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ProfanityWords.txt; sourceTree = "<group>"; };
@@ -96,6 +98,9 @@
 		1FE5C76D27DD290E009C7770 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FE5C77027DD290E009C7770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FE5C77227DD290E009C7770 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		433D6FAB69A36568DFDC6EDE /* Pods-Cat Clicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cat Clicker.release.xcconfig"; path = "Target Support Files/Pods-Cat Clicker/Pods-Cat Clicker.release.xcconfig"; sourceTree = "<group>"; };
+		4B110CCEF17F330370E40F8A /* Pods_Cat_Clicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cat_Clicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD12215CF519E93E11042229 /* Pods-Cat Clicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cat Clicker.debug.xcconfig"; path = "Target Support Files/Pods-Cat Clicker/Pods-Cat Clicker.debug.xcconfig"; sourceTree = "<group>"; };
 		E10DC1482918284A00B7264C /* AAProfanityFilter+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AAProfanityFilter+Helper.swift"; sourceTree = "<group>"; };
 		E10DC1492918284A00B7264C /* AAProfanityFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAProfanityFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +118,7 @@
 				1FDEFED228A028B9002BBCE9 /* FirebaseStorage in Frameworks */,
 				1F23496D288DA90F009B3375 /* GoogleMobileAds in Frameworks */,
 				1FDEFED028A028B9002BBCE9 /* FirebaseFirestore in Frameworks */,
+				7ADAB994568259DBF9153E8F /* Pods_Cat_Clicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,8 +140,11 @@
 		1FE5C75827DD290D009C7770 = {
 			isa = PBXGroup;
 			children = (
+				1F416F21294F7D5C00C62A4D /* CatClicker-Bridging-Header.h */,
 				1FE5C76327DD290E009C7770 /* Cat Clicker */,
 				1FE5C76227DD290E009C7770 /* Products */,
+				7E7E79D0CB91CC797AE128E4 /* Pods */,
+				57A765783E3011855380D8A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,6 +197,23 @@
 			path = "Cat Clicker";
 			sourceTree = "<group>";
 		};
+		57A765783E3011855380D8A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B110CCEF17F330370E40F8A /* Pods_Cat_Clicker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7E7E79D0CB91CC797AE128E4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BD12215CF519E93E11042229 /* Pods-Cat Clicker.debug.xcconfig */,
+				433D6FAB69A36568DFDC6EDE /* Pods-Cat Clicker.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E10DC1472918283700B7264C /* ProfanityFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,9 +231,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FE5C77527DD290E009C7770 /* Build configuration list for PBXNativeTarget "Cat Clicker" */;
 			buildPhases = (
+				DC2B569931D49C41D362106C /* [CP] Check Pods Manifest.lock */,
 				1FE5C75D27DD290E009C7770 /* Sources */,
 				1FE5C75E27DD290E009C7770 /* Frameworks */,
 				1FE5C75F27DD290E009C7770 /* Resources */,
+				910FE344D1612AFA08B5330B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -286,6 +314,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		910FE344D1612AFA08B5330B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cat Clicker/Pods-Cat Clicker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cat Clicker/Pods-Cat Clicker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cat Clicker/Pods-Cat Clicker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC2B569931D49C41D362106C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cat Clicker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1FE5C75D27DD290E009C7770 /* Sources */ = {
@@ -463,6 +533,7 @@
 		};
 		1FE5C77627DD290E009C7770 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD12215CF519E93E11042229 /* Pods-Cat Clicker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -499,6 +570,7 @@
 		};
 		1FE5C77727DD290E009C7770 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 433D6FAB69A36568DFDC6EDE /* Pods-Cat Clicker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

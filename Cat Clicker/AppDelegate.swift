@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMobileAds
 import FirebaseCore
+import StartApp
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GADMobileAds.sharedInstance().start()
+        var sdk: STAStartAppSDK = STAStartAppSDK.sharedInstance()
+        sdk.appID = "211446055"
         FirebaseApp.configure()
         // Override point for customization after application launch.
         return true

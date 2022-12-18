@@ -6,5 +6,6 @@ target 'Cat Clicker' do
   use_frameworks!
 
   # Pods for Cat Clicker
-  pod 'AAObnoxiousFilter'
+  pod 'StartAppSDK'
+
 end
