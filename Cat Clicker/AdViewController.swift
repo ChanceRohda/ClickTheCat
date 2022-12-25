@@ -11,7 +11,7 @@ struct Prize {
 import FirebaseAuth
 import UIKit
 import Firebase
-import GoogleMobileAds
+//import GoogleMobileAds
 class AdViewController: UIViewController {
     weak var viewControllerClass: ViewControllerDelegate?
     @IBOutlet weak var rewardImageView: UIImageView!
@@ -50,8 +50,8 @@ class AdViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    private var rewardedAd: GADRewardedAd?
-    
+    //private var rewardedAd: GADRewardedAd?
+        /*
     func loadRewardedAd() {
         let request = GADRequest()
         GADRewardedAd.load(withAdUnitID:"ca-app-pub-2692883151832197/4345450176",
@@ -82,11 +82,12 @@ class AdViewController: UIViewController {
             
             
         }
+         
       } else {
         print("Ad wasn't ready")
       }
     }
-    
+    */
     func dailyClickAdReward() {
         guard let userID = Auth.auth().currentUser?.uid else {return}
         DailyAdModel.collection.observeSingleEvent(of: .value) { snapshot in
@@ -120,7 +121,7 @@ class AdViewController: UIViewController {
     
     @IBAction func adButton(_ sender: Any) {
         if newDailyAdsWatched < 10 {
-            loadRewardedAd()
+            //show an ad
         } else {
             rewardLabel.text = "You have reached the daily ad limit. Come back tomorrow!"
         }
