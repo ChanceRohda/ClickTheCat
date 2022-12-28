@@ -23,7 +23,7 @@ class AdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: - Unity Ads Test/Prod mode
-        UnityAds.initialize("5090845", testMode: true, initializationDelegate: self)
+        
         let coins = (viewControllerClass?.getCoins())!
         let autocoin = (viewControllerClass?.getCps())!
         
@@ -52,6 +52,9 @@ class AdViewController: UIViewController {
         possiblePrizes.append(Prize(type: "Autocoin", amount: autocoin))
 
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        UnityAds.initialize("5090845", testMode: true, initializationDelegate: self)
     }
     
     //private var rewardedAd: GADRewardedAd?
@@ -93,9 +96,11 @@ class AdViewController: UIViewController {
     }
     */
     func dailyClickAdReward() {
+        print("daily click ad reward func started")
         guard let userID = Auth.auth().currentUser?.uid else {return}
         DailyAdModel.collection.observeSingleEvent(of: .value) { snapshot in
             guard let currentDailyAdModel = DailyAdModel(snapshot: snapshot) else {
+                print("guard statement passed")
                 DailyAdModel.collection.child(userID).updateChildValues(["adsWatched" : 1, "achievement4IsComplete" : false, "startOfDay" : Date().startOfDay.timeIntervalSince1970, "endOfDay" : Date().endOfDay.timeIntervalSince1970])
                 return
             }
@@ -246,6 +251,7 @@ extension AdViewController: UnityAdsShowDelegate {
     func unityAdsShowComplete(_ placementId: String, withFinish state: UnityAdsShowCompletionState) {
         switch state {
         case .showCompletionStateCompleted:
+            self.viewControllerClass?.increaseAdPoints(increment: 1)
             dailyClickAdReward()
             getReward()
         case .showCompletionStateSkipped:
