@@ -1,0 +1,16 @@
+PODS:
+  - UnityAds (4.5.0)
+
+DEPENDENCIES:
+  - UnityAds
+
+SPEC REPOS:
+  trunk:
+    - UnityAds
+
+SPEC CHECKSUMS:
+  UnityAds: fab621d1066e414af9ce884f1252cdd53894263e
+
+PODFILE CHECKSUM: 13203e2cdfeb689153adb567da8e0abf6d381805
+
+COCOAPODS: 1.11.3

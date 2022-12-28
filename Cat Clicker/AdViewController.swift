@@ -18,8 +18,12 @@ class AdViewController: UIViewController {
     @IBOutlet weak var rewardLabel: UILabel!
     var newDailyAdsWatched: Int = 0
     var possiblePrizes: [Prize] = []
+    var adsPreloaded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //MARK: - Unity Ads Test/Prod mode
+        UnityAds.initialize("5090845", testMode: true, initializationDelegate: self)
         let coins = (viewControllerClass?.getCoins())!
         let autocoin = (viewControllerClass?.getCps())!
         
@@ -121,7 +125,8 @@ class AdViewController: UIViewController {
     
     @IBAction func adButton(_ sender: Any) {
         if newDailyAdsWatched < 10 {
-            //show an ad
+            //MARK: - Unity Ads show here
+            UnityAds.show(self, placementId: "Rewarded_iOS", showDelegate: self)
         } else {
             rewardLabel.text = "You have reached the daily ad limit. Come back tomorrow!"
         }
@@ -207,4 +212,59 @@ class AdViewController: UIViewController {
         
     }
 
+}
+
+//MARK: - Initialization of Unity Ads
+extension AdViewController: UnityAdsInitializationDelegate {
+    
+    func initializationComplete() {
+        UnityAds.load("Rewarded_iOS", loadDelegate: self)
+    }
+    
+    func initializationFailed(_ error: UnityAdsInitializationError, withMessage message: String) {
+        print("Failed to load Unity ads")
+    }
+    
+}
+
+//MARK: - Load status of Unity Ads
+extension AdViewController: UnityAdsLoadDelegate {
+    
+    func unityAdsAdLoaded(_ placementId: String) {
+        print("Ads preloaded successfully")
+        adsPreloaded = true
+    }
+    
+    func unityAdsAdFailed(toLoad placementId: String, withError error: UnityAdsLoadError, withMessage message: String) {
+        print("Ads failed to preload")
+    }
+    
+}
+
+extension AdViewController: UnityAdsShowDelegate {
+    
+    func unityAdsShowComplete(_ placementId: String, withFinish state: UnityAdsShowCompletionState) {
+        switch state {
+        case .showCompletionStateCompleted:
+            dailyClickAdReward()
+            getReward()
+        case .showCompletionStateSkipped:
+            print("skipped")
+        @unknown default:
+            break
+        }
+    }
+    
+    func unityAdsShowFailed(_ placementId: String, withError error: UnityAdsShowError, withMessage message: String) {
+        showErrorAlert(message: "Ads failed to show")
+    }
+    
+    func unityAdsShowStart(_ placementId: String) {
+        
+    }
+    
+    func unityAdsShowClick(_ placementId: String) {
+        
+    }
+    
 }
