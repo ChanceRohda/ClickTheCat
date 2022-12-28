@@ -23,7 +23,18 @@ class AdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: - Unity Ads Test/Prod mode
-        
+        if (viewControllerClass?.getDay())! > viewControllerClass!.getCurrentDay() {
+            newDailyAdsWatched = 0
+            guard let userID = Auth.auth().currentUser?.uid else {return}
+            let upgrade = ["adsWatchedToday" : newDailyAdsWatched]
+            UserModel.collection.child(userID).updateChildValues(upgrade)
+        } else {
+            newDailyAdsWatched = (viewControllerClass?.getAdsWatchedToday())!
+        }
+        let day = viewControllerClass?.getDay()
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        let upgrade = ["currentDay" : day]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
         let coins = (viewControllerClass?.getCoins())!
         let autocoin = (viewControllerClass?.getCps())!
         
@@ -95,39 +106,21 @@ class AdViewController: UIViewController {
       }
     }
     */
-    func dailyClickAdReward() {
-        print("daily click ad reward func started")
+    
+    func dailyAdReward() {
+        newDailyAdsWatched = (viewControllerClass?.getAdsWatchedToday())!
+        newDailyAdsWatched += 1
         guard let userID = Auth.auth().currentUser?.uid else {return}
-        DailyAdModel.collection.observeSingleEvent(of: .value) { snapshot in
-            guard let currentDailyAdModel = DailyAdModel(snapshot: snapshot) else {
-                print("guard statement passed")
-                DailyAdModel.collection.child(userID).updateChildValues(["adsWatched" : 1, "achievement4IsComplete" : false, "startOfDay" : Date().startOfDay.timeIntervalSince1970, "endOfDay" : Date().endOfDay.timeIntervalSince1970])
-                return
-            }
-            if currentDailyAdModel.startOfDay < Date() && currentDailyAdModel.endOfDay > Date() {
-                self.newDailyAdsWatched = currentDailyAdModel.adsWatched + 1
-                if self.newDailyAdsWatched == 10 {
-                    DispatchQueue.main.async {
-                        self.rewardLabel.text = "You watched 10 ads! Enjoy your reward!"
-                        self.rewardImageView.image = UIImage(named: "Calendar Cat")
-                    }
-                    DailyAdModel.collection.child(userID).updateChildValues(["achievement4IsComplete": true, "adsWatched" : self.newDailyAdsWatched])
-                    DispatchQueue.main.async {
-                        self.viewControllerClass?.increaseCalendarCount()
-                        self.viewControllerClass?.addCat(cat: Cat(name: "Calendar Cat", description: "More CpC the more you collect!", image: UIImage(named: "Calendar Cat")!))
-                    }
-                     
-                } else {
-                    DailyAdModel.collection.child(userID).updateChildValues(["adsWatched" : self.newDailyAdsWatched])
-                }
-                
-            } else {
-                DailyAdModel.collection.child(userID).updateChildValues(["adsWatched" : 1, "achievement4IsComplete" : false, "startOfDay" : Date().startOfDay.timeIntervalSince1970, "endOfDay" : Date().endOfDay.timeIntervalSince1970])
-            }
+        let upgrade = ["adsWatchedToday" : newDailyAdsWatched]
+        UserModel.collection.child(userID).updateChildValues(upgrade)
+        print(newDailyAdsWatched)
+        if newDailyAdsWatched == 10 {
+            self.viewControllerClass?.increaseCalendarCount()
+            self.viewControllerClass?.addCat(cat: Cat(name: "Calendar Cat", description: "More CpC the more you collect!", image: UIImage(named: "Calendar Cat")!))
+            rewardImageView.image = UIImage(named: "Calendar Cat")
+            rewardLabel.text = "Congrats on watching 10 ads today! Enjoy your Calendar Cat! Come back tomorrow to earn another one!"
         }
     }
-    
-    
     @IBAction func adButton(_ sender: Any) {
         if newDailyAdsWatched < 10 {
             //MARK: - Unity Ads show here
@@ -252,8 +245,8 @@ extension AdViewController: UnityAdsShowDelegate {
         switch state {
         case .showCompletionStateCompleted:
             self.viewControllerClass?.increaseAdPoints(increment: 1)
-            dailyClickAdReward()
             getReward()
+            dailyAdReward()
         case .showCompletionStateSkipped:
             print("skipped")
         @unknown default:

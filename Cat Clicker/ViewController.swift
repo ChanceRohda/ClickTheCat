@@ -20,12 +20,15 @@ protocol ViewControllerDelegate: AnyObject {
     func getCoins() -> Int
     func resetcoinsVC()
     func addCat(cat: Cat)
+    func getCurrentDay() -> Int
+    func getDay() -> Int
     func getCatList() -> [Cat]
     func zeroCoins()
     func changeSelectedCat(cat: Cat)
     func getSelectedCat() -> String
     func increaseCps(amount: Int)
     func zeroCpC()
+    func getAdsWatchedToday() -> Int
     func getTotalClicks() -> Int
     func getAchievements() -> [Achievement]
     func getCps() -> Int
@@ -52,6 +55,8 @@ class ViewController: UIViewController, ViewControllerDelegate {
     var selectedCat = "Orange"
     var cpc: Int = 1
     var cps: Int = 0
+    var adsWatchedToday: Int = 0
+    var currentDay: Int = 0
     var timerIncrement: Double = 5
     var clicks: Int = 0
     var temp: Int = 0
@@ -96,6 +101,10 @@ class ViewController: UIViewController, ViewControllerDelegate {
             UserModel.collection.child(userID).updateChildValues(upgrade)
         }
         
+    }
+    func getAdsWatchedToday() -> Int {
+        print("getAdsWatchedToday func called")
+        return adsWatchedToday
     }
     func zeroTuna() {
         if tuna < 0 {
@@ -166,6 +175,16 @@ class ViewController: UIViewController, ViewControllerDelegate {
     func getCoins() -> Int{
         return coins
     }
+    func getDay() -> Int {
+        // 1. Choose a date
+        let today = Date()
+        // 2. Pick the date components
+        let day   = (Calendar.current.component(.day, from: today))
+        let hour   = (Calendar.current.component(.hour, from: today))
+        let minute = (Calendar.current.component(.minute, from: today))
+        let second = (Calendar.current.component(.second, from: today))
+        return day
+    }
     func upgrade(coinDecrement: Int, cpcIncrement: Int) {
         coins -= coinDecrement
         if selectedCat == "Gazillionaire Cat" && coinDecrement < 0 {
@@ -228,6 +247,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
   
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         if let currentUserId = Auth.auth().currentUser?.uid {
             UserModel.collection.child(currentUserId).observeSingleEvent(of: .value) { snapshot in
                 guard let user = UserModel(snapshot: snapshot) else {return}
@@ -242,6 +262,10 @@ class ViewController: UIViewController, ViewControllerDelegate {
                 
             }
         }
+        
+        
+        
+        
         
         
     }
@@ -269,7 +293,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
             let cpc = data["cpc"] as? Int ?? 1
             let adPoints = data["adPoints"] as? Int ?? 0
             let phalanx = data["phalanx"] as? Int ?? 0
+            
             let calendar = data["calendar"] as? Int ?? 0
+            let currentDay = data["currentDay"] as? Int ?? 1
             let achievement1IsComplete = data["achievement1IsComplete"] as? Bool ?? false
             self.achievements[0].isComplete = achievement1IsComplete
             let achievement2IsComplete = data["achievement2IsComplete"] as? Bool ?? false
@@ -278,6 +304,8 @@ class ViewController: UIViewController, ViewControllerDelegate {
             self.achievements[2].isComplete = achievement3IsComplete
             self.cpc = cpc
             self.cps = cps
+            
+            self.currentDay = currentDay
             self.firebaseAcquiredCats = data["firebaseAcquiredCats"] as? [String] ?? ["failed at ViewController ViewDidLoad"]
             
             for cat in self.firebaseAcquiredCats {
@@ -386,7 +414,18 @@ class ViewController: UIViewController, ViewControllerDelegate {
             guard let userID = Auth.auth().currentUser?.uid else {return}
             let upgrade = ["achievement3IsComplete" : true]
             UserModel.collection.child(userID).updateChildValues(upgrade)
+            
         }
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        Database.database().reference().child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
+            guard let data = snapshot.value as? [String: Any] else {return}
+            let adsWatchedToday = data["adsWatchedToday"] as? Int ?? 0
+            self.adsWatchedToday = adsWatchedToday
+        }
+        
+        
+        
+        
     }
 
     /*func displayReward(text: String) {
@@ -402,7 +441,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
     
     
     
-    
+    func getCurrentDay() -> Int {
+        return currentDay
+    }
     @objc func catDidClick(_ sender: Any) {
         animateCatOnPress()
         //dogRewardLabel.text = ""

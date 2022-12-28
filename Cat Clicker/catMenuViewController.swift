@@ -44,6 +44,7 @@ class catMenuViewController: UIViewController, UITableViewDataSource, UITableVie
     @objc func viewTapped() {
         view.endEditing(true)
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let catItem = acquiredCats[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "CatTableViewCell", for: indexPath) as! CatTableViewCell

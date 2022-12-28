@@ -15,6 +15,8 @@ struct UserModel {
     var coins: Int
     var calendar: Int
     var tuna: Int
+    var currentDay: Int
+    var adsWatchedToday : Int
     var firebaseAcquiredCats: [String] = []
     var selectedCat: String
     var clicks: Int
@@ -42,6 +44,7 @@ struct UserModel {
         print("")
         print(self.firebaseAcquiredCats)
         print("")
+        self.adsWatchedToday = data["adsWatchedToday"] as? Int ?? 0
         self.calendar = data["calendar"] as? Int ?? 0
         self.phalanx = data["phalanx"] as? Int ?? 0
         self.selectedCat = data["selectedCat"] as? String ?? "Orange"
@@ -50,6 +53,7 @@ struct UserModel {
         self.clicks = data["clicks"] as? Int ?? 0
         self.adPoints = data["adPoints"] as? Int ?? 0
         self.cpc = data["cpc"] as? Int ?? 1
+        self.currentDay = data["currentDay"] as? Int ?? 1
         self.cps = data["cps"] as? Int ?? 0
         self.gazAvailable = data["gazAvailable"] as? Bool ?? false
         self.upgradeNumber = data["upgradeNumber"] as? Int ?? 1
@@ -65,12 +69,14 @@ struct UserModel {
         self.username = username
         self.calendar = data["calendar"] as? Int ?? 0
         self.phalanx = data["phalanx"] as? Int ?? 0
+        self.adsWatchedToday = data["adsWatchedToday"] as? Int ?? 0
         self.selectedCat = data["selectedCat"] as? String ?? "Orange"
         self.coins = data["coins"] as? Int ?? 0
         self.tuna = data["tuna"] as? Int ?? 0
         self.clicks = data["clicks"] as? Int ?? 0
         self.adPoints = data["adPoints"] as? Int ?? 0
         self.cpc = data["cpc"] as? Int ?? 1
+        self.currentDay = data["currentDay"] as? Int ?? 1
         self.cps = data["cps"] as? Int ?? 0
         self.gazAvailable = data["gazAvailable"] as? Bool ?? false
         firebaseAcquiredCats = data["firebaseAcquiredCats"] as? [String] ?? ["Orange"]

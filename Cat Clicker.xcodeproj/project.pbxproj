@@ -18,8 +18,6 @@
 		1F23496A2885D71E009B3375 /* AchievementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2349692885D71E009B3375 /* AchievementCollectionViewCell.swift */; };
 		1F23496D288DA90F009B3375 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 1F23496C288DA90F009B3375 /* GoogleMobileAds */; };
 		1F23496F288DAB0F009B3375 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F23496E288DAB0F009B3375 /* AdViewController.swift */; };
-		1F3C101629200F3500D60644 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C101529200F3500D60644 /* Extension+Date.swift */; };
-		1F3C10182920126700D60644 /* DailyAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C10172920126700D60644 /* DailyAdModel.swift */; };
 		1F3C101A2921989E00D60644 /* paper.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C10192921989E00D60644 /* paper.mp3 */; };
 		1F4C006828678A9900FB89D8 /* CrateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C006728678A9900FB89D8 /* CrateTableViewCell.swift */; };
 		1F4C006C287882CC00FB89D8 /* UpgradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */; };
@@ -69,8 +67,6 @@
 		1F2349672885D32E009B3375 /* StatsAchievementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsAchievementsViewController.swift; sourceTree = "<group>"; };
 		1F2349692885D71E009B3375 /* AchievementCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCollectionViewCell.swift; sourceTree = "<group>"; };
 		1F23496E288DAB0F009B3375 /* AdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
-		1F3C101529200F3500D60644 /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
-		1F3C10172920126700D60644 /* DailyAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyAdModel.swift; sourceTree = "<group>"; };
 		1F3C10192921989E00D60644 /* paper.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = paper.mp3; sourceTree = "<group>"; };
 		1F4C006728678A9900FB89D8 /* CrateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrateTableViewCell.swift; sourceTree = "<group>"; };
 		1F4C006B287882CC00FB89D8 /* UpgradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeTableViewCell.swift; sourceTree = "<group>"; };
@@ -172,7 +168,6 @@
 				1F034795290ECF55000F3720 /* HallOfFameViewController.swift */,
 				1FDEFEDE28A2E0C3002BBCE9 /* ProfileViewController.swift */,
 				1FE5C76827DD290E009C7770 /* ViewController.swift */,
-				1F3C101529200F3500D60644 /* Extension+Date.swift */,
 				1F23496E288DAB0F009B3375 /* AdViewController.swift */,
 				1FD8F3E027E94CCB00D62D45 /* ShopViewController.swift */,
 				1FDEFEB7289AE4FC002BBCE9 /* UpgradesManager.swift */,
@@ -180,7 +175,6 @@
 				1F07A517282C79F400DB4A93 /* catMenuViewController.swift */,
 				1F2349672885D32E009B3375 /* StatsAchievementsViewController.swift */,
 				1FDEFEDA28A03414002BBCE9 /* UserModel.swift */,
-				1F3C10172920126700D60644 /* DailyAdModel.swift */,
 				1F034797290ED311000F3720 /* HallOfFamerModel.swift */,
 				1F4C006D287882D800FB89D8 /* Cells */,
 				1FDEFEBB289D5652002BBCE9 /* Auth.storyboard */,
@@ -362,9 +356,7 @@
 				E12913C9295CB18F0010E3AE /* Extension+UIViewController.swift in Sources */,
 				1F07A5142810E2D800DB4A93 /* CrateShopViewController.swift in Sources */,
 				1FDEFEE328AC7604002BBCE9 /* TutorialViewController.swift in Sources */,
-				1F3C101629200F3500D60644 /* Extension+Date.swift in Sources */,
 				1F034798290ED311000F3720 /* HallOfFamerModel.swift in Sources */,
-				1F3C10182920126700D60644 /* DailyAdModel.swift in Sources */,
 				1FE5C76927DD290E009C7770 /* ViewController.swift in Sources */,
 				1F034796290ECF55000F3720 /* HallOfFameViewController.swift in Sources */,
 				1FE5C76527DD290E009C7770 /* AppDelegate.swift in Sources */,
